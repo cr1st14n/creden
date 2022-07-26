@@ -36,7 +36,7 @@ class credencialesController extends Controller
                 # code...
                 break;
         }
-        $em = Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        $em = Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'asc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
         $empresas = Empresas::get();
         return view('credenciales.view_1')->with('Empr', $empresas)->with('e', $em);
     }
@@ -98,7 +98,7 @@ class credencialesController extends Controller
                 # code...
                 break;
         }
-        return Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        return Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'asc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
     }
     public function query_add_photo(Request $request, $e)
     {
