@@ -50,7 +50,7 @@
                             {{ csrf_field()}}
                             <p>Seleccione Aeropuerto</p>
                             <div class="form-group">
-                                <select name="reg" id="reg" class="form-control">
+                                <select name="aeropuerto" id="aeropuerto" class="form-control">
                                     <option value="LP">LA PAZ</option>
                                     <option value="CB">COCHABAMBA</option>
                                     <option value="SC">SANTA CRUZ</option>
@@ -123,7 +123,7 @@
                             zindex: 1500,
                         })
                     } else if (e == 1) {
-                        $.notific8('Contraseña incorrecta.', {
+                        $.notific8('Contraseña incorrecta / Region Incorrecta', {
                             life: 3000,
                             heading: 'Advertencia.',
                             icon: 'info-circled',

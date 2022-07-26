@@ -1,6 +1,53 @@
 var_delete_credencial = "";
+idEmpleadoEdit = "";
 function fun_credeEmp_edit(param) {
     console.log(param);
+    $.ajax({
+        type: "post",
+        url: "credenciales/query_edit_emp",
+        data: {
+            _token: $("meta[name=csrf-token]").attr("content"),
+            id: param,
+        },
+        // dataType: "dataType",
+        success: function (response) {
+            // console.log(new Date(response.Vencimiento).formaToFecha('YYYY-MM-DD'));
+            console.log(response);
+            $("input[name=nc_tipo_edit]").val(response.data.Tipo);
+            $("input[name=nc_cod_edit]").val(response.data.Codigo);
+            $("input[name=nc_ci_edit]").val(response.data.CI);
+            $("input[name=nc_nom_edit]").val(response.data.Nombre);
+            $("input[name=nc_pa_edit]").val(response.data.Paterno);
+            $("input[name=nc_ma_edit]").val(response.data.Materno);
+            // $("input[name=nc_em_edit]").val(response.data.Empresa);
+            $("#nc_em_edit_id").append(`<option value="${response.data.Empresa}" selected>${response.data.Empresa}</option>`);
+            $("input[name=nc_car_edit]").val(response.data.Cargo);
+            $("input[name=nc_codt_edit]").val(response.data.CodigoTarjeta);
+            $("input[name=nc_codMy_edit]").val(response.data.CodMYFARE);
+            $("input[name=nc_he_edit]").val(response.data.Herramientas);
+            $("input[name=nc_areas_acceso_edit]").val(response.data.AreasAut);
+            $("input[name=nc_gs_edit]").val(response.data.GSangre);
+            $("input[name=nc_fv_edit]").val(response.ven);
+            $("input[name=nc_acci_edit]").val(response.data);
+            $("input[name=nc_nren_edit]").val(response.data.NroRenovacion);
+            $("input[name=nc_f_in_edit]").val(response.ing);
+            $("input[name=nc_FNac_edit]").val(response.nac);
+            $("input[name=nc_pro_edit]").val(response.data.Profesion);
+            $("input[name=nc_est_edit]").val(response.data.altura);
+            $("input[name=nc_colojo_edit]").val(response.data.Ojos);
+            $("input[name=nc_maCorp_edit]").val(response.data.Peso);
+            $("input[name=nc_Fono_edit]").val(response.data.TelDom);
+            $("input[name=nc_10_edit]").val(response.data.Direccion);
+            $("input[name=nc_11_edit]").val(response.data.TelTrab);
+            $("input[name=nc_12_edit]").val(response.data.DirTrab);
+            $("input[name=nc_13_edit]").val(response.data.Observacion);
+            $("input[name=nc_estCiv_edit]").val(response.data.EstCivil);
+            $("input[name=nc_sexo_edit]").val(response.data.Sexo);
+
+            idEmpleadoEdit = response.data.idEmpleado;
+            $("#md_update_credencial").modal("show");
+        },
+    });
 }
 function fun_credeEmp_delete(param) {
     var_delete_credencial = param;
@@ -18,7 +65,7 @@ function destroy_credencial() {
         success: function (response) {
             $("#md_show_deleteConfirm").modal("show");
             if (response) {
-                var_delete_credencial="";
+                var_delete_credencial = "";
                 $("#md_show_deleteConfirm").modal("hide");
                 queryShow_1();
             } else {

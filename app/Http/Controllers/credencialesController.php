@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleados;
 use App\Models\Empresas;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 // use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use PDF;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class credencialesController extends Controller
 {
@@ -19,7 +21,7 @@ class credencialesController extends Controller
     }
     public function view_1()
     {
-        $em = Empleados::orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        $em = Empleados::where('aeropuerto',Auth::User()->aeropuerto)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
         $empresas = Empresas::get();
         return view('credenciales.view_1')->with('Empr', $empresas)->with('e', $em);
     }
@@ -42,11 +44,11 @@ class credencialesController extends Controller
         $new->Herramientas = $request->input('nc_he');
         $new->AreasAut = $request->input('nc_areas_acceso');
         $new->GSangre = $request->input('nc_gs');
-        $new->Vencimiento = $request->input('nc_fv');
+        $new->Vencimiento = Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
         $new->aeropuerto = '';
         $new->estado = $request->input('nc_acci');
-        $new->Fecha = $request->input('nc_f_in');
-        $new->FechaNac = $request->input('nc_FNac');
+        $new->Fecha = Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
+        $new->FechaNac =  Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
         $new->EstCivil = $request->input('nc_estCiv');
         $new->Sexo = $request->input('nc_sexo');
         $new->Profesion = $request->input('nc_pro');
@@ -58,13 +60,15 @@ class credencialesController extends Controller
         $new->TelTrab = $request->input('nc_11');
         $new->DirTrab = $request->input('nc_12');
         $new->Observacion = $request->input('nc_13');
+
+        $new->aeropuerto=Auth::User()->aeropuerto;
         $res = $new->save();
         return $res;
     }
 
     public function queryShow_1()
     {
-        return Empleados::orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        return Empleados::where('aeropuerto',Auth::User()->aeropuerto)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
     }
     public function query_add_photo(Request $request, $e)
     {
@@ -79,19 +83,23 @@ class credencialesController extends Controller
     // * formato de credencial
     public function pdf_creden_emp_a($e, $c)
     {
-        $data = Empleados::where('idEmpleado', $e)->select('idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->first();
+        $data = Empleados::where('idEmpleado', $e)->select('Codigo','idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento')->first();
+        $fe = Carbon::parse($data['Vencimiento']);
+        $mfecha = $fe->format('m');
+        $afecha = $fe->format('Y');
+        $meses = ['01' => 'Ene', '02' => 'Feb', '03' => 'Mar', '04' => 'Abr', '05' => 'May', '06' => 'Jun', '07' => 'Jul', '08' => 'Ago', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dic'];
         // return view('credenciales.pdf_creden_emp_a');
         switch (session('aero')) {
             case 'LP':
-                $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data]);
+                $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
                 break;
             case 'CB':
-                $pdf = pdf::loadView('credenciales.pdf_creden_emp_b', ['data' => $data]);
+                $pdf = pdf::loadView('credenciales.pdf_creden_emp_b', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
                 break;
             case 'SC':
-                $pdf = pdf::loadView('credenciales.pdf_creden_emp_c', ['data' => $data]);
+                $pdf = pdf::loadView('credenciales.pdf_creden_emp_c', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
                 break;
 
@@ -106,6 +114,14 @@ class credencialesController extends Controller
 
     public function query_destroy_credencial(Request $request)
     {
-        return Empleados::where('idEmpleado',$request->input('id'))->delete();
+        return Empleados::where('idEmpleado', $request->input('id'))->delete();
+    }
+
+    public function query_edit_emp(Request $request)
+    {
+        $emp = Empleados::where('idEmpleado', $request->input('id'))->first();
+        // return Carbon::parse($emp['Vencimiento'])->format('Y-d-m');
+        // array_push($emp,['ven'=>Carbon::parse($emp['Vencimiento'])->format('Y-d-m')]);
+        return ['data' => $emp, 'ven' => Carbon::parse($emp['Vencimiento'])->format('Y-d-m'), 'nac' => Carbon::parse($emp['FechaNac'])->format('Y-d-m'), 'ing' => Carbon::parse($emp['Fecha'])->format('Y-d-m')];
     }
 }

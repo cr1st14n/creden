@@ -9,4 +9,5 @@ class Empleados extends Model
 {
     // use HasFactory;
     protected $table='Empleados';
+    public $timestamps = false;
 }

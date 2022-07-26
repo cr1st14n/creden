@@ -13,6 +13,7 @@ class homeController extends Controller
     public function Index()
     {
         $data=session('aero');
+        // return $data;
         switch ($data) {
             case 'LP':
                 $region="NAABOL - LA PAZ";

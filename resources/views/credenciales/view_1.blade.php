@@ -82,13 +82,13 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Codigo Funcionario</span>
-                                    <input type="text" class="form-control" name="nc_cod">
+                                    <input type="text" class="form-control" name="nc_cod" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Carnet de Identidad</span>
-                                    <input type="text" class="form-control" name="nc_ci">
+                                    <input type="text" class="form-control" name="nc_ci" required> 
                                 </div>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Nombre</span>
-                                    <input type="text" class="form-control" name="nc_nom">
+                                    <input type="text" class="form-control" name="nc_nom" required>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -287,6 +287,245 @@
                             <div class="form-group col-sm-12">
                                 <span>Observaciones</span>
                                 <input type="text" class="form-control" name="nc_13">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="md_update_credencial" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="demoModalLabel">Nuevo Credencial</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <form class="forms-sample" id="form_update_creden">@csrf
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Tipo de credencial</span>
+                                    <select class="form-control" name="nc_tipo_edit">
+                                        <option value="N">Nacional</option>
+                                        <option value="L">Local</option>
+                                        <option value="T">Temporal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Codigo Funcionario</span>
+                                    <input type="text" class="form-control" name="nc_cod_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Carnet de Identidad</span>
+                                    <input type="text" class="form-control" name="nc_ci_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Nombre</span>
+                                    <input type="text" class="form-control" name="nc_nom_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Ap. Paterno</span>
+                                    <input type="text" class="form-control" name="nc_pa_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Ap. Materno</span>
+                                    <input type="text" class="form-control" name="nc_ma_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Empresa</span>
+                                    <select class="form-control" id="nc_em_edit_id" name="nc_em_edit">
+                                        @foreach($Empr as $e)
+                                        <option value="{{$e->id}}">{{ $e->NombEmpresa}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Cargo</span>
+                                    <input type="text" class="form-control" name="nc_car_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Codigo de Tarjeta</span>
+                                    <input type="text" class="form-control" name="nc_codt_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Codigo MYFARE</span>
+                                    <input type="text" class="form-control" name="nc_codMy_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Herramientas</span>
+                                    <input type="text" class="form-control" name="nc_he_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Areas Autorizadas</span>
+                                    <input type="text" class="form-control" name="nc_areas_acceso_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Grupo Sanguineo</span>
+                                    <input type="text" class="form-control" name="nc_gs_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Fecha de Vencimiento</span>
+                                    <input type="date" class="form-control" name="nc_fv_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Acciones</span>
+                                    <select class="" name="" id="" name="nc_acci_edit">
+                                        <option value="C">Dar de Alta</option>
+                                        <option value="S">Credencial Extraviada</option>
+                                        <option value="V">Credencial Robada</option>
+                                        <option value="D">Dar de Baja</option>
+                                        <option value="U">Tramite no Concluido</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Nro. Renovación</span>
+                                    <input type="text" class="form-control" name="nc_nren_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h5>Información Adicional</h5>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Fecha de Igreso</span>
+                                    <input type="date" class="form-control" name="nc_f_in_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Fecha de Nacimiento</span>
+                                    <input type="date" class="form-control" name="nc_FNac_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Estado Civil</span>
+                                    <select class="form-control" name="nc_estCiv_edit">
+                                        <option value="C">Casado</option>
+                                        <option value="S">Soltero</option>
+                                        <option value="V">Viudo</option>
+                                        <option value="D">Divorsiado</option>
+                                        <option value="U">Union Libre</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Sexo</span>
+                                    <select class="form-control" name="nc_sexo_edit">
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Profesion</span>
+                                    <input type="text" class="form-control" name="nc_pro_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Estatura CM</span>
+                                    <input type="number" class="form-control" name="nc_est_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Color de ojos</span>
+                                    <input type="text" class="form-control" name="nc_colojo_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Masa Corporal</span>
+                                    <input type="number" class="form-control" name="nc_maCorp_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Fono Domicilio</span>
+                                    <input type="text" class="form-control" name="nc_Fono_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <span>Dirección Domicilio</span>
+                                    <input type="text" class="form-control" name="nc_10_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>Fono Trabajo</span>
+                                    <input type="text" class="form-control" name="nc_11_edit">
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <span>Dirección Trabajo</span>
+                                    <input type="text" class="form-control" name="nc_12_edit">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="form-group col-sm-12">
+                                <span>Observaciones</span>
+                                <input type="text" class="form-control" name="nc_13_edit">
                             </div>
                         </div>
                         <div class="modal-footer">

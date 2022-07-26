@@ -18,19 +18,19 @@ class loginController extends Controller
         session()->forget('aero');
 
         $request->session()->get('aero');
-        $credenciales = request()->only('codusr', 'password');
+        $credenciales = request()->only('codusr', 'password','aeropuerto');
         $u = User::where('codusr', $request->input('codusr'))->first();
         if ($u == null) {
             return '0';
         } else if (Auth::attempt($credenciales)) {
-            session(['aero' => $request->input('reg')]);
+            session(['aero' => $request->input('aeropuerto')]);
 
             return 'success';
         } else {
             return '1';
         }
         if (Auth::attempt($credenciales)) {
-            session(['aero' => $request->input('reg')]);
+            session(['aero' => $request->input('aeropuerto')]);
 
             return 'success';
         }

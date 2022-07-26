@@ -102,7 +102,7 @@
                         <nav id="main-menu-navigation" class="navigation-main">
                             <div class="nav-lavel">Indice</div>
                             <div class="nav-item">
-                                <a href="#"><i class="ik ik-bar-chart-2"></i><span>Menu Principal</span></a>
+                                <a href="#" id="btn_menu_B_User"><i class="ik ik-bar-chart-2"></i><span>Usuarios</span></a>
                             </div>
                             <div class="nav-item has-sub">
                                 <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Credenciales</span> </a>
