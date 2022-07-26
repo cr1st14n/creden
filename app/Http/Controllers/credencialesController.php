@@ -21,7 +21,22 @@ class credencialesController extends Controller
     }
     public function view_1()
     {
-        $em = Empleados::where('aeropuerto',Auth::User()->aeropuerto)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        switch (Auth::User()->aeropuerto) {
+            case 'LP':
+                $aero = 'LPB';
+                break;
+            case 'CB':
+                $aero = 'CBB';
+                break;
+            case 'SC':
+                $aero = 'VVI';
+                break;
+
+            default:
+                # code...
+                break;
+        }
+        $em = Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
         $empresas = Empresas::get();
         return view('credenciales.view_1')->with('Empr', $empresas)->with('e', $em);
     }
@@ -61,14 +76,29 @@ class credencialesController extends Controller
         $new->DirTrab = $request->input('nc_12');
         $new->Observacion = $request->input('nc_13');
 
-        $new->aeropuerto=Auth::User()->aeropuerto;
+        $new->aeropuerto = Auth::User()->aeropuerto;
         $res = $new->save();
         return $res;
     }
 
     public function queryShow_1()
     {
-        return Empleados::where('aeropuerto',Auth::User()->aeropuerto)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        switch (Auth::User()->aeropuerto) {
+            case 'LP':
+                $aero = 'LPB';
+                break;
+            case 'CB':
+                $aero = 'CBB';
+                break;
+            case 'SC':
+                $aero = 'VVI';
+                break;
+
+            default:
+                # code...
+                break;
+        }
+        return Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'desc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
     }
     public function query_add_photo(Request $request, $e)
     {
@@ -83,7 +113,7 @@ class credencialesController extends Controller
     // * formato de credencial
     public function pdf_creden_emp_a($e, $c)
     {
-        $data = Empleados::where('idEmpleado', $e)->select('Codigo','idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento')->first();
+        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento')->first();
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
