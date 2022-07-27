@@ -104,14 +104,13 @@
 
         <!-- <img class="img_a" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"  alt=""> -->
         <img class="img_b" src="{{asset($data->urlphoto)}}" alt="">
-        <p class="e">DIC<br>2022</p>
-        <p class="f">01234</p>
-        <p class="a"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>ADMINISTRADOR <br>CAC</p>
-        <p class="b">1234567890</p>
+        <p class="e">{{$M}}<br>{{$Y}}</p>
+        <p class="f">{{$data->Codigo}}</p>
+        <p class="a"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>CAC</p>
+        <p class="b">{{$data->AreasAut}}</p>
         <p class="ci">{{$data->CI}}</p>
-        <p class="per">H <br> D</p>5
-
-        <img class="s2dapag" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO.jpg')}}"  alt="">
+        <p class="per"><strong style="color: red ;"> @if($data->Herramientas != '') H @endif</strong> <br> @if($data->NroRenovacion != 0) D @endif</p>
+        <img class="s2dapag" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO.jpg')}}" alt="">
 
 </body>
 

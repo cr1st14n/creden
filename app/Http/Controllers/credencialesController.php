@@ -36,16 +36,47 @@ class credencialesController extends Controller
                 # code...
                 break;
         }
-        $em = Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'asc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        $em = Empleados::where('aeropuerto', $aero)
+            ->join('Empresas', 'Empresas.Empresa', 'Empleados.Empresa')
+            ->select(
+                'Empleados.idEmpleado',
+                'Empleados.Codigo',
+                'Empleados.Nombre',
+                'Empleados.Paterno',
+                'Empleados.Materno',
+                'Empleados.CI',
+                'Empleados.urlphoto',
+                'Empleados.FechaVencCP',
+                'Empresas.NombEmpresa'
+            )
+            ->orderBy('codigo', 'asc')
+            ->get();
         $empresas = Empresas::get();
         return view('credenciales.view_1')->with('Empr', $empresas)->with('e', $em);
     }
     public function queryCreate_1(Request $request)
     {
-        // return $request;
+
+        switch (Auth::User()->aeropuerto) {
+            case 'LP':
+                $aero = 'LPB';
+                break;
+            case 'CB':
+                $aero = 'CBB';
+                break;
+            case 'SC':
+                $aero = 'VVI';
+                break;
+
+            default:
+                # code...
+                break;
+        }
         $new = new Empleados();
         // codigo
-        $new->Codigo = $request->input('nc_cod');
+        // $new->Codigo = $request->input('nc_cod');
+        $new->Codigo = intval(Empleados::where('aeropuerto',$aero)->max('Codigo')) +1;
+
         $new->tipo = $request->input('nc_tipo');
         $new->CI = $request->input('nc_ci');
         $new->Nombre = $request->input('nc_nom');
@@ -55,12 +86,12 @@ class credencialesController extends Controller
         $new->Cargo = $request->input('nc_car');
         $new->CodigoTarjeta = $request->input('nc_codt');
         $new->CodMYFARE = $request->input('nc_codMy');
-        $new->NroRenovacion = $request->input('nc_nren');
+        $new->NroRenovacion = 0;
         $new->Herramientas = $request->input('nc_he');
         $new->AreasAut = $request->input('nc_areas_acceso');
         $new->GSangre = $request->input('nc_gs');
         $new->Vencimiento = Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
-        $new->aeropuerto = '';
+        $new->aeropuerto = $aero;
         $new->estado = $request->input('nc_acci');
         $new->Fecha = Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
         $new->FechaNac =  Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
@@ -76,7 +107,6 @@ class credencialesController extends Controller
         $new->DirTrab = $request->input('nc_12');
         $new->Observacion = $request->input('nc_13');
 
-        $new->aeropuerto = Auth::User()->aeropuerto;
         $res = $new->save();
         return $res;
     }
@@ -98,7 +128,21 @@ class credencialesController extends Controller
                 # code...
                 break;
         }
-        return Empleados::where('aeropuerto', $aero)->orderBy('idEmpleado', 'asc')->select('idEmpleado', 'Codigo', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto')->get();
+        return Empleados::where('aeropuerto', $aero)
+            ->join('Empresas', 'Empresas.Empresa', 'Empleados.Empresa')
+            ->select(
+                'Empleados.idEmpleado',
+                'Empleados.Codigo',
+                'Empleados.Nombre',
+                'Empleados.Paterno',
+                'Empleados.Materno',
+                'Empleados.CI',
+                'Empleados.urlphoto',
+                'Empleados.FechaVencCP',
+                'Empresas.NombEmpresa'
+            )
+            ->orderBy('codigo', 'asc')
+            ->get();
     }
     public function query_add_photo(Request $request, $e)
     {
@@ -113,7 +157,7 @@ class credencialesController extends Controller
     // * formato de credencial
     public function pdf_creden_emp_a($e, $c)
     {
-        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento')->first();
+        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento','Herramientas','NroRenovacion')->first();
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');

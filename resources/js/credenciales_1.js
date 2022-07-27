@@ -14,7 +14,7 @@ function fun_credeEmp_edit(param) {
             // console.log(new Date(response.Vencimiento).formaToFecha('YYYY-MM-DD'));
             console.log(response);
             $("input[name=nc_tipo_edit]").val(response.data.Tipo);
-            $("input[name=nc_cod_edit]").val(response.data.Codigo);
+            // $("input[name=nc_cod_edit]").val(response.data.Codigo);
             $("input[name=nc_ci_edit]").val(response.data.CI);
             $("input[name=nc_nom_edit]").val(response.data.Nombre);
             $("input[name=nc_pa_edit]").val(response.data.Paterno);
@@ -102,10 +102,11 @@ function queryShow_1() {
                 .map(function (e) {
                     return (html = `
                 <tr>
-                    <th scope="row">${e.idEmpleado}</th>
                     <td>${e.Codigo}</td>
                     <td>${e.Nombre} ${e.Paterno} ${e.Materno}</td>
                     <td>${e.CI}</td>
+                    <td>${e.NombEmpresa}</td>
+                    <td>${e.FechaVencCP}</td>
                     <td>
                         <img src="${e.urlphoto}" width="60px" alt="">
                     </td>

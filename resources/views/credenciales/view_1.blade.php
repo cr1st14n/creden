@@ -22,10 +22,11 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Id Empleado</th>
                                     <th>Codigo</th>
                                     <th>Nombre</th>
                                     <th>C.I.</th>
+                                    <th>Empresa</th>
+                                    <th>Vencimiento</th>
                                     <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -33,10 +34,11 @@
                             <tbody id="view_1_body_1">
                                 @foreach($e as $e)
                                 <tr>
-                                    <th scope="row">{{$e->idEmpleado}}</th>
                                     <td>{{$e->Codigo}}</td>
                                     <td>{{$e->Nombre}} {{$e->Paterno}} {{$e->Materno}}</td>
                                     <td>{{$e->CI}}</td>
+                                    <td>{{$e->NombEmpresa}}</td>
+                                    <td>{{$e->FechaVencCP}}</td>
                                     <td>
                                         <img src="{{asset($e->urlphoto)}}" width="60px" alt="">
                                     </td>
@@ -81,12 +83,6 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <span>Codigo Funcionario</span>
-                                    <input type="text" class="form-control" name="nc_cod" required>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
                                     <span>Carnet de Identidad</span>
                                     <input type="text" class="form-control" name="nc_ci" required> 
                                 </div>
@@ -118,7 +114,7 @@
                                     <span>Empresa</span>
                                     <select class="form-control" id="" name="nc_em">
                                         @foreach($Empr as $e)
-                                        <option value="{{ $e->id}}">{{ $e->NombEmpresa}}</option>
+                                        <option value="{{ $e->Empresa}}">{{ $e->NombEmpresa}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -182,14 +178,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Nro. Renovación</span>
                                     <input type="text" class="form-control" name="nc_nren">
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <hr>
                         <h5>Información Adicional</h5>
                         <div class="form-group row">
@@ -320,12 +316,6 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <span>Codigo Funcionario</span>
-                                    <input type="text" class="form-control" name="nc_cod_edit">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
                                     <span>Carnet de Identidad</span>
                                     <input type="text" class="form-control" name="nc_ci_edit">
                                 </div>
@@ -357,7 +347,7 @@
                                     <span>Empresa</span>
                                     <select class="form-control" id="nc_em_edit_id" name="nc_em_edit">
                                         @foreach($Empr as $e)
-                                        <option value="{{$e->id}}">{{ $e->NombEmpresa}}</option>
+                                        <option value="{{$e->Empresa}}">{{ $e->NombEmpresa}}</option>
                                         @endforeach
                                     </select>
                                 </div>
