@@ -157,7 +157,7 @@ class credencialesController extends Controller
     // * formato de credencial
     public function pdf_creden_emp_a($e, $c)
     {
-        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento','Herramientas','NroRenovacion')->first();
+        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento','Herramientas','NroRenovacion','Empresa')->first();
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
