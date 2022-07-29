@@ -38,7 +38,7 @@
                                     <td>{{$e->Nombre}} {{$e->Paterno}} {{$e->Materno}}</td>
                                     <td>{{$e->CI}}</td>
                                     <td>{{$e->NombEmpresa}}</td>
-                                    <td>{{$e->FechaVencCP}}</td>
+                                    <td>{{date_format(date_create($e->FechaVencCP), 'd-m-Y')}}</td>
                                     <td>
                                         <img src="{{asset($e->urlphoto)}}" width="60px" alt="">
                                     </td>
@@ -84,7 +84,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Carnet de Identidad</span>
-                                    <input type="text" class="form-control" name="nc_ci" required> 
+                                    <input type="text" class="form-control" name="nc_ci" required>
                                 </div>
                             </div>
                         </div>
@@ -561,7 +561,7 @@
     <div class="modal fade" id="md_show_deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                
+
                 <div class="modal-body">
                     <p>Confrimar peticion!</p>
                 </div>

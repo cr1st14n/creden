@@ -83,13 +83,12 @@
                 </div>
             </div>
         </header>
-
         <div class="page-wrap">
             <div class="app-sidebar colored">
                 <div class="sidebar-header">
                     <a class="header-brand" href="#">
                         <div class="logo-img">
-                            <img src="{{ asset('resources/plantilla/src/img/brand-white.svg')}}" class="header-brand-img" alt="lavalite">
+                            <!-- <img src="{{ asset('resources/plantilla/src/img/brand-white.jpg')}}" class="header-brand-img" alt="lavalite"> -->
                         </div>
                         <span class="text">NAABOL</span>
                     </a>
@@ -149,6 +148,7 @@
     <!-- js funciones del sistema -->
     <!-- js de dropzone -->
     <script type="text/javascript" src="{{ asset('resources/Plantilla/dropzone/dist/dropzone.js')}}"></script>
+    <!-- <script type="text/javascript" src="{{ asset('resources/Plantilla/moment.min.js')}}"></script> -->
     <!-- end dropzone -->
     <script src="{{ asset('resources/js/inicio.js')}}"></script>
     <script src="{{ asset('resources/js/credenciales_1.js')}}"></script>

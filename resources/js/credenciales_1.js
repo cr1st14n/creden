@@ -100,13 +100,16 @@ function queryShow_1() {
         success: function (res) {
             html = res
                 .map(function (e) {
+                    var f = new Date(index.created_at);
+                    f = f.toLocaleString("es-ES", "dd/mm/yyyy");
+                   
                     return (html = `
                 <tr>
                     <td>${e.Codigo}</td>
                     <td>${e.Nombre} ${e.Paterno} ${e.Materno}</td>
                     <td>${e.CI}</td>
                     <td>${e.NombEmpresa}</td>
-                    <td>${e.FechaVencCP}</td>
+                    <td>${f}</td>
                     <td>
                         <img src="${e.urlphoto}" width="60px" alt="">
                     </td>
