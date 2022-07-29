@@ -19,8 +19,8 @@ var myDropzone = new Dropzone("#subImagen", {
     },
     success: function (file, response) {
         if (response) {
-            $('#md_add_photo').modal('hide');
-            queryShow_1()
+            $("#md_add_photo").modal("hide");
+            queryShow_1();
         } else {
         }
     },
@@ -73,3 +73,5 @@ $(".upload").on("click", function () {
     });
     return false;
 });
+
+

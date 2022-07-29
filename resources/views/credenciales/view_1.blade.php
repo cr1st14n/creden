@@ -15,7 +15,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-block">
-                    <button type="button" id="btn_creden_add_item" class="btn btn-icon btn-outline-success"><i class="ik ik-plus-circle"></i></button>
+                   <div class="row">
+
+                       <div class="col-lg-1">
+                           <button type="button" id="btn_creden_add_item" class="btn btn-primary mb-2 btn-block"><i class="fa fa-plus-circle"></i> Agregar </button>
+                       </div>
+                       <div class="col-lg-2">
+                           <div class="input-group mb-2 mr-sm-4">
+                               <div class="input-group-prepend ">
+                                   <div class="input-group-text"><i class="fa fa-search"></i></div>
+                               </div>
+                               <input type="text" class="form-control"  onkeyup="input_busqueda_creden(this.value)" placeholder="Buscar...">
+                           </div>
+                       </div>
+                   </div>
                 </div>
                 <div class="card-body p-0 table-border-style">
                     <div class="table-responsive">
@@ -38,7 +51,7 @@
                                     <td>{{$e->Nombre}} {{$e->Paterno}} {{$e->Materno}}</td>
                                     <td>{{$e->CI}}</td>
                                     <td>{{$e->NombEmpresa}}</td>
-                                    <td>{{date_format(date_create($e->FechaVencCP), 'd-m-Y')}}</td>
+                                    <td>{{date_format(date_create($e->Vencimiento), 'd-m-Y')}}</td>
                                     <td>
                                         <img src="{{asset($e->urlphoto)}}" width="60px" alt="">
                                     </td>

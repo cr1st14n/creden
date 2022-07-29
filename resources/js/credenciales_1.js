@@ -20,7 +20,9 @@ function fun_credeEmp_edit(param) {
             $("input[name=nc_pa_edit]").val(response.data.Paterno);
             $("input[name=nc_ma_edit]").val(response.data.Materno);
             // $("input[name=nc_em_edit]").val(response.data.Empresa);
-            $("#nc_em_edit_id").append(`<option value="${response.data.Empresa}" selected>${response.data.Empresa}</option>`);
+            $("#nc_em_edit_id").append(
+                `<option value="${response.data.Empresa}" selected>${response.data.Empresa}</option>`
+            );
             $("input[name=nc_car_edit]").val(response.data.Cargo);
             $("input[name=nc_codt_edit]").val(response.data.CodigoTarjeta);
             $("input[name=nc_codMy_edit]").val(response.data.CodMYFARE);
@@ -100,9 +102,9 @@ function queryShow_1() {
         success: function (res) {
             html = res
                 .map(function (e) {
-                    var f = new Date(index.created_at);
+                    var f = new Date(e.created_at);
                     f = f.toLocaleString("es-ES", "dd/mm/yyyy");
-                   
+
                     return (html = `
                 <tr>
                     <td>${e.Codigo}</td>
@@ -129,4 +131,48 @@ function queryShow_1() {
             $("#view_1_body_1").html(html);
         },
     });
+}
+
+function input_busqueda_creden(param) {
+    if (param.length != 0) {
+        $.ajax({
+            type: "get",
+            url: "credenciales/query_buscar_A",
+            data: { text: param },
+            // dataType: "dataType",
+            success: function (response) {
+                html = response
+                    .map(function (e) {
+                        var f = new Date(e.Vencimiento);
+                        f = f.toLocaleDateString();
+
+                        return (html = `
+                <tr>
+                    <td>${e.Codigo}</td>
+                    <td>${e.Nombre} ${e.Paterno} ${e.Materno}</td>
+                    <td>${e.CI}</td>
+                    <td>${e.NombEmpresa}</td>
+                    <td>${f}</td>
+                    <td>
+                        <img src="${e.urlphoto}" width="60px" alt="">
+                    </td>
+                    <td>
+                        <div class="">
+                            <button type="button" onclick="fun_credeEmp_edit('${e.idEmpleado}')" class="btn btn-icon btn-dark"><i class="ik ik-edit "></i></button>
+                            <button type="button" onclick="fun_credeEmp_delete('${e.idEmpleado}')" class="btn btn-icon btn-warning"><i class="ik ik-delete"></i></button>
+                            <button type="button" onclick="fun_credeEmp_camera('${e.idEmpleado}')" class="btn btn-icon btn-primary"><i class="ik ik-camera"></i></button>
+                            <button type="button" onclick="fun_credeEmp_emage('${e.idEmpleado}')" class="btn btn-icon btn-success"><i class="ik ik-image"></i></button>
+                            <button type="button" onclick="fun_credeEmp_print('${e.idEmpleado}')" class="btn btn-icon btn-info"><i class="ik ik-printer"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                `);
+                    })
+                    .join(" ");
+                $("#view_1_body_1").html(html);
+            },
+        });
+    }else{
+        queryShow_1();
+    }
 }

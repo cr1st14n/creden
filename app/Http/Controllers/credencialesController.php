@@ -46,7 +46,7 @@ class credencialesController extends Controller
                 'Empleados.Materno',
                 'Empleados.CI',
                 'Empleados.urlphoto',
-                'Empleados.FechaVencCP',
+                'Empleados.Vencimiento',
                 'Empresas.NombEmpresa'
             )
             ->orderBy('codigo', 'asc')
@@ -75,7 +75,7 @@ class credencialesController extends Controller
         $new = new Empleados();
         // codigo
         // $new->Codigo = $request->input('nc_cod');
-        $new->Codigo = intval(Empleados::where('aeropuerto',$aero)->max('Codigo')) +1;
+        $new->Codigo = intval(Empleados::where('aeropuerto', $aero)->max('Codigo')) + 1;
 
         $new->tipo = $request->input('nc_tipo');
         $new->CI = $request->input('nc_ci');
@@ -138,7 +138,7 @@ class credencialesController extends Controller
                 'Empleados.Materno',
                 'Empleados.CI',
                 'Empleados.urlphoto',
-                'Empleados.FechaVencCP',
+                'Empleados.Vencimiento',
                 'Empresas.NombEmpresa'
             )
             ->orderBy('codigo', 'asc')
@@ -157,7 +157,7 @@ class credencialesController extends Controller
     // * formato de credencial
     public function pdf_creden_emp_a($e, $c)
     {
-        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento','Herramientas','NroRenovacion','Empresa')->first();
+        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento', 'Herramientas', 'NroRenovacion', 'Empresa')->first();
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
@@ -197,5 +197,43 @@ class credencialesController extends Controller
         // return Carbon::parse($emp['Vencimiento'])->format('Y-d-m');
         // array_push($emp,['ven'=>Carbon::parse($emp['Vencimiento'])->format('Y-d-m')]);
         return ['data' => $emp, 'ven' => Carbon::parse($emp['Vencimiento'])->format('Y-d-m'), 'nac' => Carbon::parse($emp['FechaNac'])->format('Y-d-m'), 'ing' => Carbon::parse($emp['Fecha'])->format('Y-d-m')];
+    }
+    public function query_buscar_A(Request $request)
+    {
+        switch (Auth::User()->aeropuerto) {
+            case 'LP':
+                $aero = 'LPB';
+                break;
+            case 'CB':
+                $aero = 'CBB';
+                break;
+            case 'SC':
+                $aero = 'VVI';
+                break;
+
+            default:
+                # code...
+                break;
+        }
+        $em = Empleados::where('aeropuerto', $aero)
+            ->where('Empleados.Nombre', 'like', '%' . $request->input('text') . '%')
+            ->orwhere('Empleados.Paterno', 'like', '%' . $request->input('text') . '%')
+            ->orwhere('Empleados.Materno', 'like', '%' . $request->input('text') . '%')
+            ->join('Empresas', 'Empresas.Empresa', 'Empleados.Empresa')
+            ->select(
+                'Empleados.idEmpleado',
+                'Empleados.Codigo',
+                'Empleados.Nombre',
+                'Empleados.Paterno',
+                'Empleados.Materno',
+                'Empleados.CI',
+                'Empleados.urlphoto',
+                'Empleados.Vencimiento',
+                'Empresas.NombEmpresa'
+            )
+            ->orderBy('codigo', 'asc')
+            ->limit(100)
+            ->get();
+        return $em;
     }
 }
