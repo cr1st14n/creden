@@ -47,7 +47,8 @@ class credencialesController extends Controller
                 'Empleados.CI',
                 'Empleados.urlphoto',
                 'Empleados.Vencimiento',
-                'Empresas.NombEmpresa'
+                'Empleados.NroRenovacion',
+                'Empresas.NombEmpresa',
             )
             ->orderBy('codigo', 'asc')
             ->get();
@@ -139,6 +140,7 @@ class credencialesController extends Controller
                 'Empleados.CI',
                 'Empleados.urlphoto',
                 'Empleados.Vencimiento',
+                'Empleados.NroRenovacion',
                 'Empresas.NombEmpresa'
             )
             ->orderBy('codigo', 'asc')
@@ -157,30 +159,39 @@ class credencialesController extends Controller
     // * formato de credencial
     public function pdf_creden_emp_a($e, $c)
     {
-        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento', 'Herramientas', 'NroRenovacion', 'Empresa')->first();
+        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento', 'Herramientas', 'NroRenovacion', 'Empresa', 'Tipo')->first();
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
         $meses = ['01' => 'Ene', '02' => 'Feb', '03' => 'Mar', '04' => 'Abr', '05' => 'May', '06' => 'Jun', '07' => 'Jul', '08' => 'Ago', '09' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dic'];
         // return view('credenciales.pdf_creden_emp_a');
-        switch (session('aero')) {
-            case 'LP':
-                $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        if ($data->Tipo == 'N') {
+            $pdf = pdf::loadView('credenciales.pdf_creden_emp_n', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        
+        } elseif ($data->Tipo == 'T') {
+            $pdf = pdf::loadView('credenciales.pdf_creden_emp_t', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        
+        } elseif ($data->Tipo == 'L') {
+            switch (session('aero')) {
+                case 'LP':
+                    $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
-                break;
-            case 'CB':
-                $pdf = pdf::loadView('credenciales.pdf_creden_emp_b', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+                    break;
+                case 'CB':
+                    $pdf = pdf::loadView('credenciales.pdf_creden_emp_b', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
-                break;
-            case 'SC':
-                $pdf = pdf::loadView('credenciales.pdf_creden_emp_c', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+                    break;
+                case 'SC':
+                    $pdf = pdf::loadView('credenciales.pdf_creden_emp_c', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
-                break;
+                    break;
 
-            default:
-                # code...
-                break;
+                default:
+                    # code...
+                    break;
+            }
         }
+
         // $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data]);
         $pdf->setpaper(array(0, 0, 341, 527), 'portrait');
         return $pdf->stream('invoice.pdf');
@@ -200,6 +211,7 @@ class credencialesController extends Controller
     }
     public function query_buscar_A(Request $request)
     {
+        $r = $request->input('text');
         switch (Auth::User()->aeropuerto) {
             case 'LP':
                 $aero = 'LPB';
@@ -215,10 +227,12 @@ class credencialesController extends Controller
                 # code...
                 break;
         }
-        $em = Empleados::where('aeropuerto', $aero)
-            ->where('Empleados.Nombre', 'like', '%' . $request->input('text') . '%')
-            ->orwhere('Empleados.Paterno', 'like', '%' . $request->input('text') . '%')
-            ->orwhere('Empleados.Materno', 'like', '%' . $request->input('text') . '%')
+        $em = Empleados::where('aeropuerto', $aero)->where(function ($query) use ($r) {
+            $query->where('Empleados.Nombre', 'like', '%' . $r . '%')
+                ->orwhere('Empleados.Paterno', 'like', '%' . $r . '%')
+                ->orwhere('Empleados.Materno', 'like', '%' . $r . '%')
+                ->orwhere('Empleados.CI', 'like', '%' . $r . '%');
+        })
             ->join('Empresas', 'Empresas.Empresa', 'Empleados.Empresa')
             ->select(
                 'Empleados.idEmpleado',
@@ -229,11 +243,16 @@ class credencialesController extends Controller
                 'Empleados.CI',
                 'Empleados.urlphoto',
                 'Empleados.Vencimiento',
+                'Empleados.NroRenovacion',
                 'Empresas.NombEmpresa'
             )
             ->orderBy('codigo', 'asc')
             ->limit(100)
             ->get();
         return $em;
+    }
+    public function query_renovar_creden(Request $request)
+    {
+        return Empleados::where('idEmpleado', $request->input('id'))->update(['NroRenovacion' => intval(Empleados::where('idEmpleado', $request->input('id'))->value('NroRenovacion')) + 1]);
     }
 }

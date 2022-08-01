@@ -1,5 +1,6 @@
 var_delete_credencial = "";
 idEmpleadoEdit = "";
+idEmpleadoRenovar = "";
 function fun_credeEmp_edit(param) {
     console.log(param);
     $.ajax({
@@ -102,8 +103,8 @@ function queryShow_1() {
         success: function (res) {
             html = res
                 .map(function (e) {
-                    var f = new Date(e.created_at);
-                    f = f.toLocaleString("es-ES", "dd/mm/yyyy");
+                    var f = new Date(e.Vencimiento);
+                    f = f.toLocaleDateString();
 
                     return (html = `
                 <tr>
@@ -115,13 +116,14 @@ function queryShow_1() {
                     <td>
                         <img src="${e.urlphoto}" width="60px" alt="">
                     </td>
+                    <td>${e.NroRenovacion}</td>
                     <td>
                         <div class="">
-                            <button type="button" onclick="fun_credeEmp_edit('${e.idEmpleado}')" class="btn btn-icon btn-dark"><i class="ik ik-edit "></i></button>
-                            <button type="button" onclick="fun_credeEmp_delete('${e.idEmpleado}')" class="btn btn-icon btn-warning"><i class="ik ik-delete"></i></button>
-                            <button type="button" onclick="fun_credeEmp_camera('${e.idEmpleado}')" class="btn btn-icon btn-primary"><i class="ik ik-camera"></i></button>
-                            <button type="button" onclick="fun_credeEmp_emage('${e.idEmpleado}')" class="btn btn-icon btn-success"><i class="ik ik-image"></i></button>
-                            <button type="button" onclick="fun_credeEmp_print('${e.idEmpleado}')" class="btn btn-icon btn-info"><i class="ik ik-printer"></i></button>
+                            <button type="button" title="Editar" onclick="fun_credeEmp_edit('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-edit"></i></button>
+                            <button type="button" title="Eliminar" onclick="fun_credeEmp_delete('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-eraser"></i></button>
+                            <button type="button" title="Cargar Foto" onclick="fun_credeEmp_camera('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-camera-retro"></i></button>
+                            <button type="button" title="Visualizar" onclick="fun_credeEmp_emage('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-image"></i></button>
+                            <button type="button" title="Renovar" onclick="fun_renovar_creden('${e.idEmpleado}',1)" class="btn  btn-dark"><i class="fa fa-reddit"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -156,13 +158,14 @@ function input_busqueda_creden(param) {
                     <td>
                         <img src="${e.urlphoto}" width="60px" alt="">
                     </td>
+                    <td>${e.NroRenovacion}</td>
                     <td>
                         <div class="">
-                            <button type="button" onclick="fun_credeEmp_edit('${e.idEmpleado}')" class="btn btn-icon btn-dark"><i class="ik ik-edit "></i></button>
-                            <button type="button" onclick="fun_credeEmp_delete('${e.idEmpleado}')" class="btn btn-icon btn-warning"><i class="ik ik-delete"></i></button>
-                            <button type="button" onclick="fun_credeEmp_camera('${e.idEmpleado}')" class="btn btn-icon btn-primary"><i class="ik ik-camera"></i></button>
-                            <button type="button" onclick="fun_credeEmp_emage('${e.idEmpleado}')" class="btn btn-icon btn-success"><i class="ik ik-image"></i></button>
-                            <button type="button" onclick="fun_credeEmp_print('${e.idEmpleado}')" class="btn btn-icon btn-info"><i class="ik ik-printer"></i></button>
+                            <button type="button" title="Editar" onclick="fun_credeEmp_edit('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-edit"></i></button>
+                            <button type="button" title="Eliminar" onclick="fun_credeEmp_delete('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-eraser"></i></button>
+                            <button type="button" title="Cargar Foto" onclick="fun_credeEmp_camera('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-camera-retro"></i></button>
+                            <button type="button" title="Visualizar" onclick="fun_credeEmp_emage('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-image"></i></button>
+                            <button type="button" title="Renovar" onclick="fun_renovar_creden('${e.idEmpleado}',1)" class="btn  btn-dark"><i class="fa fa-reddit"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -172,7 +175,42 @@ function input_busqueda_creden(param) {
                 $("#view_1_body_1").html(html);
             },
         });
-    }else{
+    } else {
         queryShow_1();
+    }
+}
+
+function fun_renovar_creden(id, param) {
+    console.log(param);
+    switch (param) {
+        case 1:
+            idEmpleadoRenovar = id;
+            $("#mod_conf_renovacion").modal("show");
+            break;
+        case 2:
+            $.ajax({
+                type: "post",
+                url: "credenciales/query_renovar_creden",
+                data: {
+                    _token: $("meta[name=csrf-token]").attr("content"),
+                    id: idEmpleadoRenovar,
+                },
+                // dataType: "dataType",
+                success: function (response) {
+                    if (response) {
+                        console.log(response);
+                        $("#mod_conf_renovacion").modal("hide");
+                        idEmpleadoRenovar = "";
+                    }
+                },
+            });
+            break;
+        case 3:
+            $("#mod_conf_renovacion").modal("hide");
+            idEmpleadoRenovar = "";
+            break;
+
+        default:
+            break;
     }
 }

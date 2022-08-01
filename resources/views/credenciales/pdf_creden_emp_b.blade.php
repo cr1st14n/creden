@@ -39,7 +39,7 @@
             width: 10px;
             word-wrap: break-word;
             text-align: center;
-            line-height: 45px;
+            line-height: 58px;
             font-size: 50px;
             top: 80px;
 
@@ -77,7 +77,7 @@
         .ci {
             position: fixed;
             top: 555px;
-            left: 20px;
+            left: 60px;
             font-size: 40px;
         }
 

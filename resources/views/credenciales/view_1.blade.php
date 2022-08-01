@@ -15,20 +15,21 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-block">
-                   <div class="row">
-
-                       <div class="col-lg-1">
-                           <button type="button" id="btn_creden_add_item" class="btn btn-primary mb-2 btn-block"><i class="fa fa-plus-circle"></i> Agregar </button>
-                       </div>
-                       <div class="col-lg-2">
-                           <div class="input-group mb-2 mr-sm-4">
-                               <div class="input-group-prepend ">
-                                   <div class="input-group-text"><i class="fa fa-search"></i></div>
-                               </div>
-                               <input type="text" class="form-control"  onkeyup="input_busqueda_creden(this.value)" placeholder="Buscar...">
-                           </div>
-                       </div>
-                   </div>
+                    <div class="row">
+                        <div class="col-lg-2" style="text-align: rigth ;">
+                            <div class="input-group mb-2 mr-sm-4">
+                                <div class="input-group-prepend ">
+                                    <div class="input-group-text"><i class="fa fa-search"></i></div>
+                                </div>
+                                <input type="text" class="form-control" onkeyup="input_busqueda_creden(this.value)" placeholder="Buscar por NOMBRE o CI">
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" id="btn_creden_add_item" class="btn btn-primary mb-2 btn-block"><i class="fa fa-plus-circle"></i> Agregar </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body p-0 table-border-style">
                     <div class="table-responsive">
@@ -41,7 +42,8 @@
                                     <th>Empresa</th>
                                     <th>Vencimiento</th>
                                     <th>Imagen</th>
-                                    <th>Acciones</th>
+                                    <th width='5%'># Re.</th>
+                                    <th width='20%'>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="view_1_body_1">
@@ -55,13 +57,14 @@
                                     <td>
                                         <img src="{{asset($e->urlphoto)}}" width="60px" alt="">
                                     </td>
+                                    <td>{{$e->NroRenovacion}}</td>
                                     <td>
                                         <div class="">
-                                            <button type="button" onclick="fun_credeEmp_edit('{{$e->idEmpleado}}')" class="btn btn-icon btn-dark"><i class="ik ik-edit "></i></button>
-                                            <button type="button" onclick="fun_credeEmp_delete('{{$e->idEmpleado}}')" class="btn btn-icon btn-warning"><i class="ik ik-delete"></i></button>
-                                            <button type="button" onclick="fun_credeEmp_camera('{{$e->idEmpleado}}')" class="btn btn-icon btn-primary"><i class="ik ik-camera"></i></button>
-                                            <button type="button" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}')" class="btn btn-icon btn-success"><i class="ik ik-image"></i></button>
-                                            <button type="button" onclick="fun_credeEmp_print('{{$e->idEmpleado}}')" class="btn btn-icon btn-info"><i class="ik ik-printer"></i></button>
+                                            <button type="button" title="Editar" onclick="fun_credeEmp_edit('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-edit"></i></button>
+                                            <button type="button" title="Eliminar" onclick="fun_credeEmp_delete('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-eraser"></i></button>
+                                            <button type="button" title="Cargar Foto" onclick="fun_credeEmp_camera('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-camera-retro"></i></button>
+                                            <button type="button" title="Visualizar" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-image"></i></button>
+                                            <button type="button" title="Renovar" onclick="fun_renovar_creden('{{$e->idEmpleado}}',1)" class="btn  btn-dark"><i class="fa fa-reddit"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -581,6 +584,25 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="button" class="btn btn-primary" onclick="destroy_credencial()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal confirmar renovacion credencial -->
+    <div class="modal fade" id="mod_conf_renovacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterLabel">Mesaje de Confirmación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <p>Nota: Una vez confirmado, la renovación estara registrada dentro la base de datos y sera expresada en el futuro credencial con la letra <strong>"D"</strong></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="fun_renovar_creden(0,3)" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" onclick="fun_renovar_creden(0,2)" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
         </div>

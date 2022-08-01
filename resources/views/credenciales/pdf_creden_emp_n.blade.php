@@ -20,7 +20,7 @@
 
         body {
             background-color: papayawhip;
-            background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}");
+            background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg')}}");
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -30,6 +30,7 @@
             top: 400px;
             left: 90px;
             font-size: 30px;
+            color: white;
         }
 
         p.b {
