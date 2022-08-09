@@ -37,7 +37,7 @@ Route::group(['prefix' => 'credenciales'], function () {
     Route::get('query_buscar_A', [credencialesController::class, 'query_buscar_A']);
     Route::post('query_renovar_creden', [credencialesController::class, 'query_renovar_creden']);
     // * credencial formato
-    Route::get('pdf_creden_emp_a/{e}/{f}', [credencialesController::class, 'pdf_creden_emp_a']);
+    Route::get('pdf_creden_emp_a/{e}/{f}/{t}', [credencialesController::class, 'pdf_creden_emp_a']);
 });
 Route::group(['prefix' => 'Usuarios'], function () {
     Route::get('view_2_user',[ usuarioController::class, 'view_1']);

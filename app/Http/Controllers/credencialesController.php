@@ -157,7 +157,7 @@ class credencialesController extends Controller
     }
 
     // * formato de credencial
-    public function pdf_creden_emp_a($e, $c)
+    public function pdf_creden_emp_a($e, $c, $tipo)
     {
         $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento', 'Herramientas', 'NroRenovacion', 'Empresa', 'Tipo')->first();
         $fe = Carbon::parse($data['Vencimiento']);
@@ -170,6 +170,19 @@ class credencialesController extends Controller
         
         } elseif ($data->Tipo == 'T') {
             $pdf = pdf::loadView('credenciales.pdf_creden_emp_t', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+            $valore=['LPB'=>'','LPB'=>'','LPB'=>''];
+            switch ($data->Aeropuerto) {
+                case 'LPB':
+                    # code...
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+
+
+
         
         } elseif ($data->Tipo == 'L') {
             switch (session('aero')) {

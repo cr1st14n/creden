@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="card-header d-block">
                     <div class="row">
-                        <div class="col-lg-2" style="text-align: rigth ;">
+                        <div class="col-lg-3" style="text-align: rigth ;">
                             <div class="input-group mb-2 mr-sm-4">
                                 <div class="input-group-prepend ">
                                     <div class="input-group-text"><i class="fa fa-search"></i></div>
@@ -24,15 +24,15 @@
                                 <input type="text" class="form-control" onkeyup="input_busqueda_creden(this.value)" placeholder="Buscar por NOMBRE o CI">
                             </div>
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-7">
                         </div>
-                        <div class="col-lg-1">
+                        <div class="col-lg-2">
                             <button type="button" id="btn_creden_add_item" class="btn btn-primary mb-2 btn-block"><i class="fa fa-plus-circle"></i> Agregar </button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body p-0 table-border-style">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="min-height:250px ;">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -43,7 +43,7 @@
                                     <th>Vencimiento</th>
                                     <th>Imagen</th>
                                     <th width='5%'># Re.</th>
-                                    <th width='20%'>Acciones</th>
+                                    <th width='5%'>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="view_1_body_1">
@@ -59,12 +59,20 @@
                                     </td>
                                     <td>{{$e->NroRenovacion}}</td>
                                     <td>
-                                        <div class="">
-                                            <button type="button" title="Editar" onclick="fun_credeEmp_edit('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-edit"></i></button>
-                                            <button type="button" title="Eliminar" onclick="fun_credeEmp_delete('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-eraser"></i></button>
-                                            <button type="button" title="Cargar Foto" onclick="fun_credeEmp_camera('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-camera-retro"></i></button>
-                                            <button type="button" title="Visualizar" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}')" class="btn btn-dark"><i class="fa fa-image"></i></button>
-                                            <button type="button" title="Renovar" onclick="fun_renovar_creden('{{$e->idEmpleado}}',1)" class="btn  btn-dark"><i class="fa fa-reddit"></i></button>
+                                        <div class="btn-group float-md-left mr-1 mb-1">
+                                            <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+
+                                                <i class="ik ik-chevron-down mr-0 align-middle"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <button class="dropdown-item" onclick="fun_credeEmp_edit('{{$e->idEmpleado}}')">Editar</button>
+                                                <button class="dropdown-item" onclick="fun_credeEmp_delete('{{$e->idEmpleado}}')">Eliminar</button>
+                                                <button class="dropdown-item" onclick="fun_credeEmp_camera('{{$e->idEmpleado}}')">Cargar Imagen</button>
+                                                <div role="separator" class="dropdown-divider"></div>
+                                                <button class="dropdown-item" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}',1)">Generar Credencial A</button>
+                                                <button class="dropdown-item" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}',2)">Generar Credencial B</button>
+                                                <button class="dropdown-item" onclick="fun_renovar_creden('{{$e->idEmpleado}}',1)">Renovar</button>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>

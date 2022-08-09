@@ -101,7 +101,6 @@
 
 <body>
     <div class="ri">
-
         <!-- <img class="img_a" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"  alt=""> -->
         <img class="img_b" src="{{asset($data->urlphoto)}}" alt="">
         <p class="e">{{$M}}<br>{{$Y}}</p>

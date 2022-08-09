@@ -83,14 +83,16 @@ function fun_credeEmp_camera(param) {
     myDropzone.removeAllFiles(true);
     $("#md_add_photo").modal("show");
 }
-function fun_credeEmp_emage(param) {
-    console.log(param);
-    reg = $("#reg_aero").attr("name");
-    var url = `credenciales/pdf_creden_emp_a/${param}/${reg}`;
-    console.log(reg);
+
+// * --------- funciones de generar credencial
+function fun_credeEmp_emage(param,tipo) {
+        reg = $("#reg_aero").attr("name");
+        var url = `credenciales/pdf_creden_emp_a/${param}/${reg}/${tipo}`;
     $("#emb_sec_pdf_creden").attr("src", url);
     $("#md_show_credencial").modal("show");
 }
+// * =======l
+
 function fun_credeEmp_print(param) {
     console.log(param);
 }
@@ -118,12 +120,20 @@ function queryShow_1() {
                     </td>
                     <td>${e.NroRenovacion}</td>
                     <td>
-                        <div class="">
-                            <button type="button" title="Editar" onclick="fun_credeEmp_edit('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-edit"></i></button>
-                            <button type="button" title="Eliminar" onclick="fun_credeEmp_delete('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-eraser"></i></button>
-                            <button type="button" title="Cargar Foto" onclick="fun_credeEmp_camera('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-camera-retro"></i></button>
-                            <button type="button" title="Visualizar" onclick="fun_credeEmp_emage('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-image"></i></button>
-                            <button type="button" title="Renovar" onclick="fun_renovar_creden('${e.idEmpleado}',1)" class="btn  btn-dark"><i class="fa fa-reddit"></i></button>
+                        <div class="btn-group float-md-left mr-1 mb-1">
+                            <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                
+                                <i class="ik ik-chevron-down mr-0 align-middle"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item"  onclick="fun_credeEmp_edit('${e.idEmpleado}')">Editar</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_delete('${e.idEmpleado}')">Eliminar</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_camera('${e.idEmpleado}')">Cargar Imagen</button>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',1)">Generar Credencial A</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',2)">Generar Credencial B</button>
+                                <button class="dropdown-item"  onclick="fun_renovar_creden('${e.idEmpleado}',1)">Renovar</button>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -160,12 +170,20 @@ function input_busqueda_creden(param) {
                     </td>
                     <td>${e.NroRenovacion}</td>
                     <td>
-                        <div class="">
-                            <button type="button" title="Editar" onclick="fun_credeEmp_edit('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-edit"></i></button>
-                            <button type="button" title="Eliminar" onclick="fun_credeEmp_delete('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-eraser"></i></button>
-                            <button type="button" title="Cargar Foto" onclick="fun_credeEmp_camera('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-camera-retro"></i></button>
-                            <button type="button" title="Visualizar" onclick="fun_credeEmp_emage('${e.idEmpleado}')" class="btn btn-dark"><i class="fa fa-image"></i></button>
-                            <button type="button" title="Renovar" onclick="fun_renovar_creden('${e.idEmpleado}',1)" class="btn  btn-dark"><i class="fa fa-reddit"></i></button>
+                        <div class="btn-group float-md-left mr-1 mb-1">
+                            <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                
+                                <i class="ik ik-chevron-down mr-0 align-middle"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <button class="dropdown-item"  onclick="fun_credeEmp_edit('${e.idEmpleado}')">Editar</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_delete('${e.idEmpleado}')">Eliminar</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_camera('${e.idEmpleado}')">Cargar Imagen</button>
+                                <div role="separator" class="dropdown-divider"></div>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',1)">Generar Credencial A</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',2)">Generar Credencial B</button>
+                                <button class="dropdown-item"  onclick="fun_renovar_creden('${e.idEmpleado}',1)">Renovar</button>
+                            </div>
                         </div>
                     </td>
                 </tr>
