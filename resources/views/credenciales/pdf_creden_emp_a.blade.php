@@ -79,6 +79,7 @@
             top: 555px;
             left: 60px;
             font-size: 40px;
+            font-weight: bold;
         }
 
         .per {
