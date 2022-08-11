@@ -165,45 +165,52 @@ class credencialesController extends Controller
         $afecha = $fe->format('Y');
         $meses = ['01' => 'ENE', '02' => 'FEB', '03' => 'MAR', '04' => 'ABR', '05' => 'MAY', '06' => 'JUN', '07' => 'JUL', '08' => 'AGO', '09' => 'SEP', '10' => 'OCT', '11' => 'NOV', '12' => 'DIC'];
         // return view('credenciales.pdf_creden_emp_a');
-        if ($data->Tipo == 'N') {
-            $pdf = pdf::loadView('credenciales.pdf_creden_emp_n', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
-        
-        } elseif ($data->Tipo == 'T') {
-            $pdf = pdf::loadView('credenciales.pdf_creden_emp_t', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
-            $valore=['LPB'=>'','LPB'=>'','LPB'=>''];
-            switch ($data->Aeropuerto) {
-                case 'LPB':
-                    # code...
-                    break;
-                
-                default:
-                    # code...
-                    break;
-            }
+        $rutaimg = 'resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg';
+        $pdf = pdf::loadView(
+            'credenciales.pdf_creden_emp_n',
+            [
+                'data' => $data,
+                'M' => $meses[$mfecha],
+                'Y' => $afecha = $fe->format('Y'),
+                'ruta'=> $rutaimg,
+            ]
+        );
 
 
+        // if ($data->Tipo == 'N') {
+        //     $pdf = pdf::loadView('credenciales.pdf_creden_emp_n', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        // } elseif ($data->Tipo == 'T') {
+        //     $pdf = pdf::loadView('credenciales.pdf_creden_emp_t', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        //     $valore = ['LPB' => '', 'LPB' => '', 'LPB' => ''];
+        //     switch ($data->Aeropuerto) {
+        //         case 'LPB':
+        //             # code...
+        //             break;
 
-        
-        } elseif ($data->Tipo == 'L') {
-            switch (session('aero')) {
-                case 'LP':
-                    $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        //         default:
+        //             # code...
+        //             break;
+        //     }
+        // } elseif ($data->Tipo == 'L') {
+        //     switch (session('aero')) {
+        //         case 'LP':
+        //             $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
-                    break;
-                case 'CB':
-                    $pdf = pdf::loadView('credenciales.pdf_creden_emp_b', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        //             break;
+        //         case 'CB':
+        //             $pdf = pdf::loadView('credenciales.pdf_creden_emp_b', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
-                    break;
-                case 'SC':
-                    $pdf = pdf::loadView('credenciales.pdf_creden_emp_c', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
+        //             break;
+        //         case 'SC':
+        //             $pdf = pdf::loadView('credenciales.pdf_creden_emp_c', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
 
-                    break;
+        //             break;
 
-                default:
-                    # code...
-                    break;
-            }
-        }
+        //         default:
+        //             # code...
+        //             break;
+        //     }
+        // }
 
         // $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data]);
         $pdf->setpaper(array(0, 0, 341, 527), 'portrait');

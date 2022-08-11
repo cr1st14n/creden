@@ -20,7 +20,8 @@
 
         body {
             background-color: papayawhip;
-            background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg')}}");
+            /* background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg')}}"); */
+            background-image: url("{{asset($ruta)}}");
             background-size: cover;
             background-repeat: no-repeat;
         }
