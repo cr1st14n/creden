@@ -20,7 +20,8 @@
 
         body {
             background-color: papayawhip;
-            background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}");
+            /* background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"); */
+            background-image: url("{{asset($ruta)}}");
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -30,6 +31,9 @@
             top: 400px;
             left: 90px;
             font-size: 30px;
+            text-transform: uppercase;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         p.b {
@@ -42,6 +46,8 @@
             line-height: 58px;
             font-size: 50px;
             top: 80px;
+            font-family: sans-serif;
+            font-weight: bold;
 
         }
 
@@ -58,8 +64,8 @@
         p.f {
             position: fixed;
             right: 75px;
-            top: 253px;
-            font-size: 25px;
+            top: 105px;
+            font-size: 30px;
             color: black;
             font-weight: bold;
         }
@@ -79,6 +85,8 @@
             top: 555px;
             left: 60px;
             font-size: 40px;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         .per {
@@ -86,6 +94,8 @@
             top: 555px;
             right: 20px;
             font-size: 40px;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         img.s2dapag {
@@ -103,7 +113,7 @@
     <div class="ri">
         <!-- <img class="img_a" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"  alt=""> -->
         <img class="img_b" src="{{asset($data->urlphoto)}}" alt="">
-        <p class="e">{{$M}}<br>{{$Y}}</p>
+        <!-- <p class="e">{{$M}}<br>{{$Y}}</p> -->
         <p class="f">{{$data->Codigo}}</p>
         <p class="a"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
         <p class="b">{{$data->AreasAut}}</p>

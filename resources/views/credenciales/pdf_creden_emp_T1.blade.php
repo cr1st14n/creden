@@ -32,6 +32,9 @@
             left: 90px;
             font-size: 30px;
             color: white;
+            text-transform: uppercase;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         p.b {
@@ -44,6 +47,8 @@
             line-height: 58px;
             font-size: 50px;
             top: 80px;
+            font-family: sans-serif;
+            font-weight: bold;
 
         }
 
@@ -81,6 +86,8 @@
             top: 555px;
             left: 60px;
             font-size: 40px;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         .per {
@@ -88,6 +95,8 @@
             top: 555px;
             right: 20px;
             font-size: 40px;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         img.s2dapag {

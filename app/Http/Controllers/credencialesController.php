@@ -159,60 +159,82 @@ class credencialesController extends Controller
     // * formato de credencial
     public function pdf_creden_emp_a($e, $c, $tipo)
     {
-        $data = Empleados::where('idEmpleado', $e)->select('Codigo', 'idEmpleado', 'Nombre', 'Paterno', 'Materno', 'CI', 'urlphoto', 'AreasAut', 'Cargo', 'CI', 'Vencimiento', 'Herramientas', 'NroRenovacion', 'Empresa', 'Tipo')->first();
+        $data = Empleados::where('idEmpleado', $e)->select(
+            'Codigo',
+            'idEmpleado',
+            'Nombre',
+            'Paterno',
+            'Materno',
+            'CI',
+            'urlphoto',
+            'AreasAut',
+            'Cargo',
+            'CI',
+            'Vencimiento',
+            'Herramientas',
+            'NroRenovacion',
+            'Empresa',
+            'aeropuerto',
+            'Tipo'
+        )->first();
+        $empr=Empresas::where('Empresa',$data['Empresa'])->value('NombEmpresa');
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
         $meses = ['01' => 'ENE', '02' => 'FEB', '03' => 'MAR', '04' => 'ABR', '05' => 'MAY', '06' => 'JUN', '07' => 'JUL', '08' => 'AGO', '09' => 'SEP', '10' => 'OCT', '11' => 'NOV', '12' => 'DIC'];
         // return view('credenciales.pdf_creden_emp_a');
-        $rutaimg = 'resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg';
-        $pdf = pdf::loadView(
-            'credenciales.pdf_creden_emp_n',
-            [
-                'data' => $data,
-                'M' => $meses[$mfecha],
-                'Y' => $afecha = $fe->format('Y'),
-                'ruta'=> $rutaimg,
-            ]
-        );
+        $rutaimgL = [
+            'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg',
+            'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/COCHABAMBA2022.jpg',
+            'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/SANTACRUZAMVERSO.jpg',
+        ];
+        $rutaimgT = [
+            'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/TEMPORALLP.jpg',
+            'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/TEMPORALCBB.jpg',
+            'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/TEMPORALVVI.jpg',
+        ];
 
-
-        // if ($data->Tipo == 'N') {
-        //     $pdf = pdf::loadView('credenciales.pdf_creden_emp_n', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
-        // } elseif ($data->Tipo == 'T') {
-        //     $pdf = pdf::loadView('credenciales.pdf_creden_emp_t', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
-        //     $valore = ['LPB' => '', 'LPB' => '', 'LPB' => ''];
-        //     switch ($data->Aeropuerto) {
-        //         case 'LPB':
-        //             # code...
-        //             break;
-
-        //         default:
-        //             # code...
-        //             break;
-        //     }
-        // } elseif ($data->Tipo == 'L') {
-        //     switch (session('aero')) {
-        //         case 'LP':
-        //             $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
-
-        //             break;
-        //         case 'CB':
-        //             $pdf = pdf::loadView('credenciales.pdf_creden_emp_b', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
-
-        //             break;
-        //         case 'SC':
-        //             $pdf = pdf::loadView('credenciales.pdf_creden_emp_c', ['data' => $data, 'M' => $meses[$mfecha], 'Y' => $afecha = $fe->format('Y')]);
-
-        //             break;
-
-        //         default:
-        //             # code...
-        //             break;
-        //     }
-        // }
-
-        // $pdf = pdf::loadView('credenciales.pdf_creden_emp_a', ['data' => $data]);
+        switch ($data['Tipo']) {
+            case 'N':
+                $pdf = pdf::loadView(
+                    'credenciales.pdf_creden_emp_T1',
+                    [
+                        'data' => $data,
+                        'em' => $empr,
+                        'M' => $meses[$mfecha],
+                        'Y' => $afecha = $fe->format('Y'),
+                        'ruta' => 'resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg',
+                    ]
+                );
+                break;
+            case 'L':
+                $pdf = pdf::loadView(
+                    'credenciales.pdf_creden_emp_T1',
+                    [
+                        'data' => $data,
+                        'em' => $empr,
+                        'M' => $meses[$mfecha],
+                        'Y' => $afecha = $fe->format('Y'),
+                        'ruta' => $rutaimgL[$data['aeropuerto']],
+                    ]
+                );
+                break;
+            case 'T':
+                $pdf = pdf::loadView(
+                    'credenciales.pdf_creden_emp_T2',
+                    [
+                        'data' => $data,
+                        'em' => $empr,
+                        'M' => $meses[$mfecha],
+                        'Y' => $afecha = $fe->format('Y'),
+                        'ruta' => $rutaimgT[$data['aeropuerto']],
+                    ]
+                );
+                break;
+            default:
+                # code...
+                break;
+        }
         $pdf->setpaper(array(0, 0, 341, 527), 'portrait');
         return $pdf->stream('invoice.pdf');
     }

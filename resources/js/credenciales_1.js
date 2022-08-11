@@ -130,8 +130,7 @@ function queryShow_1() {
                                 <button class="dropdown-item"  onclick="fun_credeEmp_delete('${e.idEmpleado}')">Eliminar</button>
                                 <button class="dropdown-item"  onclick="fun_credeEmp_camera('${e.idEmpleado}')">Cargar Imagen</button>
                                 <div role="separator" class="dropdown-divider"></div>
-                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',1)">Generar Credencial A</button>
-                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',2)">Generar Credencial B</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',1)">Generar Credencial</button>
                                 <button class="dropdown-item"  onclick="fun_renovar_creden('${e.idEmpleado}',1)">Renovar</button>
                             </div>
                         </div>
@@ -180,8 +179,7 @@ function input_busqueda_creden(param) {
                                 <button class="dropdown-item"  onclick="fun_credeEmp_delete('${e.idEmpleado}')">Eliminar</button>
                                 <button class="dropdown-item"  onclick="fun_credeEmp_camera('${e.idEmpleado}')">Cargar Imagen</button>
                                 <div role="separator" class="dropdown-divider"></div>
-                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',1)">Generar Credencial A</button>
-                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',2)">Generar Credencial B</button>
+                                <button class="dropdown-item"  onclick="fun_credeEmp_emage('${e.idEmpleado}',1)">Generar Credencial</button>
                                 <button class="dropdown-item"  onclick="fun_renovar_creden('${e.idEmpleado}',1)">Renovar</button>
                             </div>
                         </div>

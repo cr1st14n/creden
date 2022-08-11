@@ -69,8 +69,7 @@
                                                 <button class="dropdown-item" onclick="fun_credeEmp_delete('{{$e->idEmpleado}}')">Eliminar</button>
                                                 <button class="dropdown-item" onclick="fun_credeEmp_camera('{{$e->idEmpleado}}')">Cargar Imagen</button>
                                                 <div role="separator" class="dropdown-divider"></div>
-                                                <button class="dropdown-item" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}',1)">Generar Credencial A</button>
-                                                <button class="dropdown-item" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}',2)">Generar Credencial B</button>
+                                                <button class="dropdown-item" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}',1)">Generar Credencial</button>
                                                 <button class="dropdown-item" onclick="fun_renovar_creden('{{$e->idEmpleado}}',1)">Renovar</button>
                                             </div>
                                         </div>
@@ -108,7 +107,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Carnet de Identidad</span>
-                                    <input type="text" class="form-control" name="nc_ci" required>
+                                    <input type="text" class="form-control" name="nc_ci" required maxlength="12">
                                 </div>
                             </div>
                         </div>
@@ -172,7 +171,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Areas Autorizadas</span>
-                                    <input type="text" class="form-control" name="nc_areas_acceso">
+                                    <input type="text" class="form-control" name="nc_areas_acceso" maxlength="8" required>
                                 </div>
                             </div>
                         </div>
