@@ -107,6 +107,7 @@ class credencialesController extends Controller
         $new->TelTrab = $request->input('nc_11');
         $new->DirTrab = $request->input('nc_12');
         $new->Observacion = $request->input('nc_13');
+        $new->data_creden = serialize(array());
 
         $res = $new->save();
         return $res;
@@ -177,7 +178,7 @@ class credencialesController extends Controller
             'aeropuerto',
             'Tipo'
         )->first();
-        $empr=Empresas::where('Empresa',$data['Empresa'])->value('NombEmpresa');
+        $empr = Empresas::where('Empresa', $data['Empresa'])->value('NombEmpresa');
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
@@ -293,8 +294,38 @@ class credencialesController extends Controller
             ->get();
         return $em;
     }
-    public function query_renovar_creden(Request $request)
+    public function query_renovar_creden($tipo, Request $request)
     {
-        return Empleados::where('idEmpleado', $request->input('id'))->update(['NroRenovacion' => intval(Empleados::where('idEmpleado', $request->input('id'))->value('NroRenovacion')) + 1]);
+        $data = Empleados::where('idEmpleado', $request->input('id'))->first();
+
+        // * sector de lista de renovaciones acnteriores  $tipo == 1
+
+        if ($tipo == 1) {
+            return [
+                'data' => unserialize($data['data_creden']),
+                'cod'  => $data['CodigoTarjeta'],
+            ];
+        }
+        
+        if ($request->input('ren_cred_codigo')<=999) {
+            return 0;
+        }
+
+        // * sector de createa renovacion de credencial $tipo == 2
+        $d = ($data['data_creden'] == NULL) ? array() : unserialize($data['data_creden']);
+        $new = [
+            'motivo' => $request->input('ren_cred_motivo'),
+            'tarjeta' => $data['CodigoTarjeta'],
+            'fecha' => Carbon::now()->format('d-m-Y'),
+        ];
+        array_push($d, $new);
+        return Empleados::where('idEmpleado', $request->input('id'))->update([
+            'data_creden' => serialize($d),
+            'CodigoTarjeta' => $request->input('ren_cred_codigo'),
+            'NroRenovacion' => intval($data['NroRenovacion']) + 1
+        ]);
+        // return $d;
+
+        // return Empleados::where('idEmpleado', $request->input('id'))->update(['NroRenovacion' => intval(Empleados::where('idEmpleado', $request->input('id'))->value('NroRenovacion')) + 1]);
     }
 }

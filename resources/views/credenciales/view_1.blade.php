@@ -601,11 +601,54 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterLabel">Mesaje de Confirmación</h5>
+                    <h5 class="modal-title" id="exampleModalCenterLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <p>Nota: Una vez confirmado, la renovación estara registrada dentro la base de datos y sera expresada en el futuro credencial con la letra <strong>"D"</strong></p>
+                    <h5 id="text_creden_vigent"> <strong></strong></h5>
+                    <hr>
+                    <div class="row">
+                        <p>Historial de renovaciones.</p>
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped" >
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Fecha</th>
+                                        <th>Motivo</th>
+                                        <th>Codigo de Tarjeta</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table_renov_creden_emp">
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <hr>
+                    <h5>Formulario de renovacion de credencial</h5>
+                    <form id="form_ren_cred">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleSelectGender">Motivo</label>
+                                    <select class="form-control" id="ren_cred_motivo" name="ren_cred_motivo">
+                                        <option value="Extravio">Extravio</option>
+                                        <option value="Deteriorado">Deteriorado</option>
+                                        <option value="Caducado">Caducado</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail3">Codigo de nuevo credencial</label>
+                                    <input type="number" class="form-control" id="ren_cred_codigo" name="ren_cred_codigo" placeholder="###">
+                                </div>
+                            </div>
+                        </div>
+                        <p>Nota: Una vez confirmado, la renovación estara registrada dentro la base de datos y sera expresada en el futuro credencial con la letra <strong>"D"</strong></p>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" onclick="fun_renovar_creden(0,3)" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

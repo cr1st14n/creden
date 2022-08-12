@@ -85,9 +85,9 @@ function fun_credeEmp_camera(param) {
 }
 
 // * --------- funciones de generar credencial
-function fun_credeEmp_emage(param,tipo) {
-        reg = $("#reg_aero").attr("name");
-        var url = `credenciales/pdf_creden_emp_a/${param}/${reg}/${tipo}`;
+function fun_credeEmp_emage(param, tipo) {
+    reg = $("#reg_aero").attr("name");
+    var url = `credenciales/pdf_creden_emp_a/${param}/${reg}/${tipo}`;
     $("#emb_sec_pdf_creden").attr("src", url);
     $("#md_show_credencial").modal("show");
 }
@@ -197,19 +197,55 @@ function input_busqueda_creden(param) {
 }
 
 function fun_renovar_creden(id, param) {
-    console.log(param);
     switch (param) {
         case 1:
+            $("#table_renov_creden_emp").html("");
+            $("#text_creden_vigent").html("Codigo de credencial Vigente :###");
+            $("#form_ren_cred").trigger("reset");
             idEmpleadoRenovar = id;
-            $("#mod_conf_renovacion").modal("show");
-            break;
-        case 2:
             $.ajax({
                 type: "post",
-                url: "credenciales/query_renovar_creden",
+                url: "credenciales/query_renovar_creden/1",
                 data: {
                     _token: $("meta[name=csrf-token]").attr("content"),
                     id: idEmpleadoRenovar,
+                },
+                // dataType: "dataType",
+                success: function (response) {
+                    console.log(response);
+                    cont = 0;
+                    html2 = response.data
+                        .map(function (p) {
+                            return (a = `
+                            <tr>
+                                <th scope="row">${(cont += 1)}</th>
+                                <td>${p.fecha}</td>
+                                <td>${p.motivo}</td>
+                                <td>${p.tarjeta}</td>
+                            </tr>
+                            `);
+                        })
+                        .join(" ");
+                    $("#table_renov_creden_emp").html(html2);
+                    $("#text_creden_vigent").html(
+                        "Codigo de credencial Vigente : <strong>" +
+                            response.cod +
+                            "</strong>"
+                    );
+                },
+            });
+            $("#mod_conf_renovacion").modal("show");
+            break;
+        case 2:
+
+            $.ajax({
+                type: "post",
+                url: "credenciales/query_renovar_creden/2",
+                data: {
+                    _token: $("meta[name=csrf-token]").attr("content"),
+                    id: idEmpleadoRenovar,
+                    ren_cred_motivo: $("#ren_cred_motivo").val(),
+                    ren_cred_codigo: $("#ren_cred_codigo").val(),
                 },
                 // dataType: "dataType",
                 success: function (response) {
@@ -217,6 +253,8 @@ function fun_renovar_creden(id, param) {
                         console.log(response);
                         $("#mod_conf_renovacion").modal("hide");
                         idEmpleadoRenovar = "";
+                    } else  {
+                        console.log("Completar codigo nueva credencial");
                     }
                 },
             });
