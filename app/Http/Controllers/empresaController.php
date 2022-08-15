@@ -27,17 +27,17 @@ class empresaController extends Controller
     }
     public function query_create(Request $request)
     {
-        return ' ;alskdfj';
+        // return ' ;alskdfj';
         $n=new Empresas();
-        $n->Empresa=$request->input('Emp_abreviacion');
-        $n->NombEmpresa=$request->input('Emp_nombre');
-        $n->Direccion=$request->input('Emp_dir');
-        $n->Telefono=$request->input('Emp_telf');
-        $n->Casilla=$request->input('Emp_casi');
-        $n->Fax=$request->input('Emp_fax');
-        $n->Email=$request->input('Emp_email');
-        $n->RepLegal=$request->input('Emp_repLeg');
-        $n->Ruc=$request->input('Emp_ruc');
-       return $res=$n->save();   
+    //     $n->Empresa=$request->input('Emp_abreviacion');
+    //     $n->NombEmpresa=$request->input('Emp_nombre');
+    //     $n->Direccion=$request->input('Emp_dir');
+    //     $n->Telefono=$request->input('Emp_telf');
+    //     $n->Casilla=$request->input('Emp_casi');
+    //     $n->Fax=$request->input('Emp_fax');
+    //     $n->Email=$request->input('Emp_email');
+    //     $n->RepLegal=$request->input('Emp_repLeg');
+    //     $n->Ruc=$request->input('Emp_ruc');
+    //    return $res=$n->save();   
     }
 }

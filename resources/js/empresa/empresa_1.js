@@ -79,7 +79,6 @@ $("#btn_new_empresa").click(function (e) {
 });
 $("#form_new_empresa").submit(function (e) {
     e.preventDefault();
-    console.log(' create');
     $.ajax({
         type: "post",
         url: "Empresa/query_create",
