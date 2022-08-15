@@ -9,4 +9,6 @@ class Empresas extends Model
 {
     // use HasFactory;
     protected $table='Empresas';
+    public $timestamps = false;
+
 }

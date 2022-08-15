@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\credencialesController;
+use App\Http\Controllers\empresaController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\usuarioController;
+use App\Models\Empresas;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,4 +46,11 @@ Route::group(['prefix' => 'Usuarios'], function () {
     Route::post('create_user',[ usuarioController::class, 'create_user']);
     Route::get('query_list',[usuarioController::class,'query_list']);
     Route::post('query_destroyUser',[usuarioController::class,'query_destroyUser']);
+});
+Route::group(['prefix'=>'Empresa'],function ()
+{
+    Route::get('view_2_empr',[empresaController::class,'view_2_empr']);
+    Route::get('query_list',[empresaController::class,'query_list']);
+    Route::get('query_buscar_A',[empresaController::class,'query_buscar_A']);
+    Route::post('query_create',[empresaController::class,'query_create']);
 });

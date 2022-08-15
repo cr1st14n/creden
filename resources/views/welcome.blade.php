@@ -103,6 +103,9 @@
                             <div class="nav-item">
                                 <a href="#" id="btn_menu_B_User"><i class="ik ik-bar-chart-2"></i><span>Usuarios</span></a>
                             </div>
+                            <div class="nav-item">
+                                <a href="#" id="btn_menu_B_Empr"><i class="ik ik-bar-chart-2"></i><span>Empresas</span></a>
+                            </div>
                             <div class="nav-item has-sub">
                                 <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Credenciales</span> </a>
                                 <div class="submenu-content">

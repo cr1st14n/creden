@@ -22,4 +22,16 @@ $('#btn_menu_B_User').click(function (e) {
         }
     });
 });
+$('#btn_menu_B_Empr').click(function (e) { 
+    e.preventDefault();
+    $.ajax({
+        type: "get",
+        url: "Empresa/view_2_empr",
+        // data: "data",
+        // dataType: "dataType",
+        success: function (response) {
+            $('#main_cont').html(response);
+        }
+    });
+});
 
