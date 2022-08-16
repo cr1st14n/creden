@@ -53,4 +53,7 @@ Route::group(['prefix'=>'Empresa'],function ()
     Route::get('query_list',[empresaController::class,'query_list']);
     Route::get('query_buscar_A',[empresaController::class,'query_buscar_A']);
     Route::post('query_create',[empresaController::class,'query_create']);
+    Route::get('query_orden_list_1',[empresaController::class,'query_orden_list_1']);
+    Route::get('query_edit',[empresaController::class,'query_edit']);
+    Route::post('query_update/{id}',[empresaController::class,'query_update']);
 });

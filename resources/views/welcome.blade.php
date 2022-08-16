@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="{{ asset('resources/plantilla/plugins/ionicons/dist/css/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{ asset('resources/plantilla/plugins/icon-kit/dist/css/iconkit.min.css')}}">
     <link rel="stylesheet" href="{{ asset('resources/plantilla/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}">
-    <link rel="stylesheet" href="{{ asset('resources/plantilla/dist/css/theme.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('resources/plantilla/dist/css/theme.min.css')}}">`
+    <link rel="stylesheet" href="{{ asset('resources/plantilla/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}">
+
     <script src="{{ asset('resources/plantilla/src/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 
     <!-- dropzone -->
@@ -138,13 +140,16 @@
 
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <script>
         window.jQuery || document.write('<script src="../src/js/vendor/jquery-3.3.1.min.js"><\/script>')
     </script>
+
     <script src="{{ asset('resources/plantilla/plugins/popper.js/dist/umd/popper.min.js')}}"></script>
     <script src="{{ asset('resources/plantilla/plugins/bootstrap/dist/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('resources/plantilla/plugins/perfect-scrollbar/dist/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{ asset('resources/plantilla/plugins/jquery-toast-plugin/dist/jquery.toast.min.js')}}"></script>
     <script src="{{ asset('resources/plantilla/dist/js/theme.min.js')}}"></script>
     <script src="{{ asset('resources/plantilla/js/form-components.js')}}"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -153,6 +158,7 @@
     <script type="text/javascript" src="{{ asset('resources/Plantilla/dropzone/dist/dropzone.js')}}"></script>
     <!-- <script type="text/javascript" src="{{ asset('resources/Plantilla/moment.min.js')}}"></script> -->
     <!-- end dropzone -->
+
     <script src="{{ asset('resources/js/inicio.js')}}"></script>
     <script src="{{ asset('resources/js/credenciales_1.js')}}"></script>
 
