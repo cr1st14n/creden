@@ -20,7 +20,8 @@
 
         body {
             background-color: papayawhip;
-            background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/SANTACRUZAMVERSO.jpg')}}");
+            /* background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg')}}"); */
+            background-image: url("{{asset($ruta)}}");
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -30,6 +31,10 @@
             top: 400px;
             left: 90px;
             font-size: 30px;
+            color: white;
+            text-transform: uppercase;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         p.b {
@@ -42,6 +47,8 @@
             line-height: 58px;
             font-size: 50px;
             top: 80px;
+            font-family: sans-serif;
+            font-weight: bold;
 
         }
 
@@ -57,9 +64,9 @@
 
         p.f {
             position: fixed;
-            right: 75px;
-            top: 253px;
-            font-size: 25px;
+            right: 80px;
+            top: 130px;
+            font-size: 30px;
             color: black;
             font-weight: bold;
         }
@@ -79,6 +86,8 @@
             top: 555px;
             left: 60px;
             font-size: 40px;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         .per {
@@ -86,6 +95,8 @@
             top: 555px;
             right: 20px;
             font-size: 40px;
+            font-family: sans-serif;
+            font-weight: bold;
         }
 
         img.s2dapag {
@@ -104,14 +115,17 @@
 
         <!-- <img class="img_a" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"  alt=""> -->
         <img class="img_b" src="{{asset($data->urlphoto)}}" alt="">
-        <p class="e">{{$M}}<br>{{$Y}}</p>
+        <!-- <p class="e">{{$M}}<br>{{$Y}}</p> -->
         <p class="f">{{$data->Codigo}}</p>
-        <p class="a"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
+        @if($aero=='LPB')
+        <p class="a" style="color: black ;"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
+        @else
+        <p class="a" style="color: black ;"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
+        @endif
         <p class="b">{{$data->AreasAut}}</p>
         <p class="ci">{{$data->CI}}</p>
         <p class="per"><strong style="color: red ;"> @if($data->Herramientas != '') H @endif</strong> <br> @if($data->NroRenovacion != 0) D @endif</p>
         <img class="s2dapag" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO.jpg')}}" alt="">
-
 </body>
 
 </html>

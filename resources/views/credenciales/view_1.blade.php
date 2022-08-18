@@ -47,35 +47,6 @@
                                 </tr>
                             </thead>
                             <tbody id="view_1_body_1">
-                                @foreach($e as $e)
-                                <tr>
-                                    <td>{{$e->Codigo}}</td>
-                                    <td>{{$e->Nombre}} {{$e->Paterno}} {{$e->Materno}}</td>
-                                    <td>{{$e->CI}}</td>
-                                    <td>{{$e->NombEmpresa}}</td>
-                                    <td>{{date_format(date_create($e->Vencimiento), 'd-m-Y')}}</td>
-                                    <td>
-                                        <img src="{{asset($e->urlphoto)}}" width="60px" alt="">
-                                    </td>
-                                    <td>{{$e->NroRenovacion}}</td>
-                                    <td>
-                                        <div class="btn-group float-md-left mr-1 mb-1">
-                                            <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-
-                                                <i class="ik ik-chevron-down mr-0 align-middle"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <button class="dropdown-item" onclick="fun_credeEmp_edit('{{$e->idEmpleado}}')">Editar</button>
-                                                <button class="dropdown-item" onclick="fun_credeEmp_delete('{{$e->idEmpleado}}')">Eliminar</button>
-                                                <button class="dropdown-item" onclick="fun_credeEmp_camera('{{$e->idEmpleado}}')">Cargar Imagen</button>
-                                                <div role="separator" class="dropdown-divider"></div>
-                                                <button class="dropdown-item" onclick="fun_credeEmp_emage('{{$e->idEmpleado}}',1)">Generar Credencial</button>
-                                                <button class="dropdown-item" onclick="fun_renovar_creden('{{$e->idEmpleado}}',1)">Renovar</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -108,6 +79,18 @@
                                 <div class="form-group">
                                     <span>Carnet de Identidad</span>
                                     <input type="text" class="form-control" name="nc_ci" required maxlength="12">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <span>TIPOS DE PERMISO DE CONDUCIR</span>
+                                    <select class="form-control" name="nc_t_licencia" required>
+                                        <option value="P">Particular P</option>
+                                        <option value="A">Profecional A</option>
+                                        <option value="B">Profecional B</option>
+                                        <option value="C">Profecional C</option>
+                                        <option value="T">Motorista T</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -598,7 +581,7 @@
 
     <!-- Modal confirmar renovacion credencial -->
     <div class="modal fade" id="mod_conf_renovacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterLabel"></h5>
@@ -630,7 +613,16 @@
                     <form id="form_ren_cred">
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleSelectGender">Motivo</label>
+                                    <select class="form-control" id="ren_cred_tipo" name="ren_cred_motivo">
+                                        <option value="1">Plataforma</option>
+                                        <option value="2">Condución</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleSelectGender">Motivo</label>
                                     <select class="form-control" id="ren_cred_motivo" name="ren_cred_motivo">
@@ -640,7 +632,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Codigo de nuevo credencial</label>
                                     <input type="number" class="form-control" id="ren_cred_codigo" name="ren_cred_codigo" placeholder="###">

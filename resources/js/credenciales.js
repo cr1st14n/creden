@@ -1,3 +1,4 @@
+
 var myDropzone = new Dropzone("#subImagen", {
     url: "null",
     headers: {
@@ -25,6 +26,8 @@ var myDropzone = new Dropzone("#subImagen", {
         }
     },
 });
+
+
 $("#btn_creden_add_item").click(function (e) {
     e.preventDefault();
 
@@ -73,5 +76,3 @@ $(".upload").on("click", function () {
     });
     return false;
 });
-
-

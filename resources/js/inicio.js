@@ -7,6 +7,7 @@ $("#btn_menu_A").click(function (e) {
         // dataType: "dataType",
         success: function (response) {
             $("#main_cont").html(response);
+            queryShow_1();
         },
     });
 });
@@ -33,6 +34,9 @@ $("#btn_menu_B_Empr").click(function (e) {
             $("#main_cont").html(response);
         },
     });
+});
+$(" #btn_menu_creden_B").click(function (e) {
+    e.preventDefault();
 });
 
 function noti_fi(tp, tx) {

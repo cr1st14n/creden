@@ -102,9 +102,11 @@
                     <div class="nav-container">
                         <nav id="main-menu-navigation" class="navigation-main">
                             <div class="nav-lavel">Indice</div>
+                            @if(Auth::user()->nivel==1)
                             <div class="nav-item">
                                 <a href="#" id="btn_menu_B_User"><i class="ik ik-bar-chart-2"></i><span>Usuarios</span></a>
                             </div>
+                            @endif
                             <div class="nav-item">
                                 <a href="#" id="btn_menu_B_Empr"><i class="ik ik-bar-chart-2"></i><span>Empresas</span></a>
                             </div>
@@ -112,7 +114,7 @@
                                 <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Credenciales</span> </a>
                                 <div class="submenu-content">
                                     <a href="" id="btn_menu_A" class="menu-item">Credenciales</a>
-                                    <a href="" class="menu-item">Vistas</a>
+                                    <a href="" id="btn_menu_creden_B" class="menu-item">Crenciales Vias</a>
                                 </div>
                             </div>
 

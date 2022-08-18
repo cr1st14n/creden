@@ -21,8 +21,14 @@ class usuarioController extends Controller
         // $new->Password = bcrypt($request->input('usu_pass'));
         // $new->Aeropuerto = $request->input('usu_aero');
         // $res = $new->save();
-        
-       return User::create(['Nombre' => $request->input('usu_nombre'),'CodUsr' => $request->input('usu_cod'),'Password' => bcrypt($request->input('usu_pass')),'Aeropuerto'=>$request->input('usu_aero')]);
+
+        return User::create([
+            'Nombre' => $request->input('usu_nombre'),
+            'CodUsr' => $request->input('usu_cod'),
+            'Password' => bcrypt($request->input('usu_pass')),
+            'Aeropuerto' => $request->input('usu_aero'),
+            'nivel' => $request->input('usu_privilegio')
+        ]);
 
 
         // return $res;

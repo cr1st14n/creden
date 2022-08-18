@@ -80,6 +80,7 @@ class credencialesController extends Controller
 
         $new->tipo = $request->input('nc_tipo');
         $new->CI = $request->input('nc_ci');
+        $new->CategoriaLic = $request->input('nc_t_licencia');
         $new->Nombre = $request->input('nc_nom');
         $new->Paterno = $request->input('nc_pa');
         $new->Materno = $request->input('nc_ma');
@@ -194,6 +195,11 @@ class credencialesController extends Controller
             'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/TEMPORALCBB.jpg',
             'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/TEMPORALVVI.jpg',
         ];
+        $rutaimgLC = [
+            'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/CONDUCCION-PLATAFORMA-LP.jpg',
+            'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/CONDUCCION-PLATAFORMA-CBB.jpg',
+            'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/CONDUCCION-PLATAFORMA-VVI.jpg',
+        ];
 
         switch ($data['Tipo']) {
             case 'N':
@@ -205,6 +211,8 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => 'resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg',
+                        'aero'=>$data['aeropuerto'],
+
                     ]
                 );
                 break;
@@ -217,6 +225,8 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgL[$data['aeropuerto']],
+                        'aero'=>$data['aeropuerto'],
+
                     ]
                 );
                 break;
@@ -229,12 +239,27 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgT[$data['aeropuerto']],
+                        'aero'=>$data['aeropuerto'],
                     ]
                 );
                 break;
             default:
                 # code...
                 break;
+        }
+        if ($tipo == 2) {
+            $pdf = pdf::loadView(
+                'credenciales.pdf_creden_emp_lc',
+                [
+                    'data' => $data,
+                    'em' => $empr,
+                    'M' => $meses[$mfecha],
+                    'Y' => $afecha = $fe->format('Y'),
+                    'ruta' => $rutaimgLC[$data['aeropuerto']],
+                    'aero'=>$data['aeropuerto'],
+
+                ]
+            );
         }
         $pdf->setpaper(array(0, 0, 341, 527), 'portrait');
         return $pdf->stream('invoice.pdf');
@@ -306,8 +331,8 @@ class credencialesController extends Controller
                 'cod'  => $data['CodigoTarjeta'],
             ];
         }
-        
-        if ($request->input('ren_cred_codigo')<=999) {
+
+        if ($request->input('ren_cred_codigo') <= 999) {
             return 0;
         }
 

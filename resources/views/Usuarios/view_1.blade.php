@@ -80,6 +80,15 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <span>Provilegio</span>
+                                <select name="usu_privilegio" class="form-control" id="" required>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">enrolador</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
