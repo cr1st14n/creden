@@ -54,7 +54,7 @@
                         </div>
                         <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
                     </div>
-                    <h5 id="reg_aero" name="{{$reg}}">{{$region}}</h5>
+                    <h5 id="reg_aero" name="{{$reg}}" style="color:white ;">{{$region}}</h5>
                     <div class="top-menu d-flex align-items-center">
 
                         <div class="dropdown">
