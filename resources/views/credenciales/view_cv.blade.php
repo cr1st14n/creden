@@ -5,48 +5,45 @@
                 <div class="page-header-title">
                     <i class="ik ik-edit bg-blue"></i>
                     <div class="d-inline">
-                        <h5>Registro de credenciales</h5>
+                        <h5>Registro de credenciales Visita</h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header d-block">
                     <div class="row">
                         <div class="col-lg-3" style="text-align: rigth ;">
-                            <div class="input-group mb-2 mr-sm-4">
+                            <!-- <div class="input-group mb-2 mr-sm-4">
                                 <div class="input-group-prepend ">
                                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                                 </div>
                                 <input type="text" class="form-control" onkeyup="input_busqueda_creden(this.value)" placeholder="Buscar por NOMBRE o CI">
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="col-lg-7">
+                        <div class="col-lg-6">
                         </div>
-                        <div class="col-lg-2">
-                            <button type="button" id="btn_creden_add_item" class="btn btn-primary mb-2 btn-block"><i class="fa fa-plus-circle"></i> Agregar </button>
+                        <div class="col-lg-3">
+                            <button type="button" id="btn_credenCV_add_item" class="btn btn-primary mb-2 btn-block"><i class="fa fa-plus-circle"></i> Agregar </button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body p-0 table-border-style">
-                    <div class="table-responsive" style="min-height:250px ;">
+                    <div class="table-responsive" style="min-height:250px;">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
                                     <th>Codigo</th>
-                                    <th>Nombre</th>
-                                    <th>C.I.</th>
-                                    <th>Empresa</th>
-                                    <th>Vencimiento</th>
-                                    <th>Imagen</th>
-                                    <th width='5%'># Re.</th>
-                                    <th width='5%'>Acciones</th>
+                                    <th>Cod ZK</th>
+                                    <th>Cod MYFARE</th>
+                                    <th>Areas</th>
+                                    <th width='20%'>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="view_1_body_1">
+                            <tbody id="view_1_body">
                             </tbody>
                         </table>
                     </div>
@@ -55,213 +52,35 @@
         </div>
     </div>
 
-    <div class="modal fade" id="md_add_credencial" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
-        <div class="modal-dialog  modal-lg" role="document">
+    <div class="modal fade" id="md_add_credenVis" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+        <div class="modal-dialog  " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="demoModalLabel">Nuevo Credencial</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form class="forms-sample" id="form_new_creden">@csrf
+                    <form class="forms-sample" id="form_new_creden_visita">@csrf
                         <div class="form-group row ">
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <select class="form-control" name="nc_tipo">
-                                        <option value="N">Nacional</option>
-                                        <option value="L">Local</option>
-                                        <option value="T">Temporal</option>
-                                    </select>
-                                    <b>Tipo credencial</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group  small ">
-                                    <input type="text" class="form-control form-control-sm " name="nc_ci" required maxlength="12">
-                                    <b style="text-transform: upercase ;">Carnet de Indentidad</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="text" class="form-control" name="nc_nom" required>
-                                    <b>Nombre</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="text" class="form-control" name="nc_pa">
-                                    <b>Ap. Paterno</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="text" class="form-control" name="nc_ma">
-                                    <b>Ap. Materno</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <select class="form-control" id="" name="nc_em">
-                                        @foreach($Empr as $e)
-                                        <option value="{{ $e->Empresa}}">{{ $e->NombEmpresa}}</option>
-                                        @endforeach
-                                    </select>
-                                    <b>Empresa</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="text" class="form-control" name="nc_car">
-                                    <b>Cargo</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="text" class="form-control" name="nc_codt">
+                                    <input type="text" class="form-control" name="ncv_codt" required>
                                     <b>Codigo de Tarjeta</b>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="nc_codMy">
+                                    <input type="text" class="form-control" name="ncv_codMy">
                                     <b>Codigo MYFARE</b>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="nc_he">
-                                    <b>Herramientas</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nc_areas_acceso" pattern="[0-9_-]{8}" maxlength="8" required placeholder="#-#-##-#, 8 simbolos">
+                                    <input type="text" class="form-control" name="ncv_areas_acceso" pattern="[0-9_-]{8}" maxlength="8" required placeholder="#-#-##-#, 8 simbolos">
                                     <b>Areas Autorizadas</b>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nc_gs">
-                                    <b>Grupo Sanguineo</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <input type="date" class="form-control" name="nc_fv">
-                                    <b>Fecha de Vencimiento</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <select class="form-control" name="" id="" name="nc_acci">
-                                        <option value="C">Dar de Alta</option>
-                                        <option value="S">Credencial Extraviada</option>
-                                        <option value="V">Credencial Robada</option>
-                                        <option value="D">Dar de Baja</option>
-                                        <option value="U">Tramite no Concluido</option>
-                                    </select>
-                                    <b>Acciones</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 row">
-                                <div class="col-sm-3">
-                                    <div class="form-group small">
-                                        <select class="form-control" name="nc_t_licencia" id="nc_t_licencia" >
-                                            <option value="">Ninguna</option>
-                                            <option value="P">Particular P</option>
-                                            <option value="A">Profecional A</option>
-                                            <option value="B">Profecional B</option>
-                                            <option value="C">Profecional C</option>
-                                        </select>
-                                        <b>Tipo de licencia</b>
-                                    </div>
-                                </div>
-                                <div class="col-sm-9" id="option_tipo_lic_veh">
-                                    
-                                </div>
-                            </div>
-                            <h5 class="col-sm-12">Información Adicional</h5>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="date" class="form-control" name="nc_f_in">
-                                    <b>Fecha de Igreso</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="date" class="form-control" name="nc_FNac">
-                                    <b>Fecha de Nacimiento</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <select class="form-control" name="nc_estCiv">
-                                        <option value="C">Casado</option>
-                                        <option value="S">Soltero</option>
-                                        <option value="V">Viudo</option>
-                                        <option value="D">Divorsiado</option>
-                                        <option value="U">Union Libre</option>
-                                    </select>
-                                    <b>Estado Civil</b>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <select class="form-control" name="nc_sexo">
-                                        <option value="M">Masculino</option>
-                                        <option value="F">Femenino</option>
-                                    </select>
-                                    <b>Sexo</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="text" class="form-control" name="nc_pro">
-                                    <b>Profesion</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group small">
-                                    <input type="number" class="form-control" name="nc_est">
-                                    <b>Estatura CM</b>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="nc_colojo">
-                                    <b>Color de ojos</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <input type="number" class="form-control" name="nc_maCorp">
-                                    <b>Masa Corporal</b>
-                                </div>
-                            </div>
-                            <div class="col-sm-12"></div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <b>Detalle Domicilio</b>
-                                    <input type="number" class="form-control" name="nc_Fono" placeholder="Telf...">
-                                    <input type="text" class="form-control" name="nc_10" placeholder="Dirección">
-
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <b>Detalle Trbajo</b>
-                                    <input type="number" class="form-control" name="nc_11" placeholder="Telf...">
-                                    <input type="text" class="form-control" name="nc_12" placeholder="Dirección">
-                                </div>
-                            </div>
-                            <div class="form-group col-sm-12">
-                                <input type="text" class="form-control" name="nc_13">
-                                <b>Observaciones</b>
-                            </div>
-
-                            <div class="modal-footer">
+                            <div class="modal-footer col-sm-12">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                                 <button type="submit" class="btn btn-primary">Guardar</button>
                             </div>
@@ -319,16 +138,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <span>Empresa</span>
-                                    <select class="form-control" id="nc_em_edit_id" name="nc_em_edit">
-                                        @foreach($Empr as $e)
-                                        <option value="{{$e->Empresa}}">{{ $e->NombEmpresa}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
+
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <span>Cargo</span>
@@ -527,15 +337,15 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="md_show_credencial" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="md_show_credencial_v" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <embed src="" type="" id="emb_sec_pdf_creden" width="1000" height="800">
+                <embed src="" type="" id="emb_sec_pdf_creden_v" width="1000" height="800">
             </div>
         </div>
     </div>
     <!-- modal para delete item -->
-    <div class="modal fade" id="md_show_deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="md_crevis_deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -544,7 +354,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="destroy_credencial()">Confirmar</button>
+                    <button type="button" class="btn btn-primary" onclick="destroy_creden_visita(2,0)">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -621,4 +431,5 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('resources/js/credenciales.js')}}"></script>
+
+<script src="{{ asset('resources/js/credenciales_cv.js')}}"></script>

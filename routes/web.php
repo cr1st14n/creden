@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\credencialesController;
+use App\Http\Controllers\credvisitaController;
 use App\Http\Controllers\empresaController;
 use App\Http\Controllers\homeController;
 use App\Http\Controllers\loginController;
@@ -40,6 +41,13 @@ Route::group(['prefix' => 'credenciales'], function () {
     Route::post('query_renovar_creden/{tipo}', [credencialesController::class, 'query_renovar_creden']);
     // * credencial formato
     Route::get('pdf_creden_emp_a/{e}/{f}/{t}', [credencialesController::class, 'pdf_creden_emp_a']);
+
+    // * Credenciales de visitas
+    Route::get('view_cv_1',[credvisitaController::class,'viewHome']);
+    Route::get('query_listCV',[credvisitaController::class,'query_listCV']);
+    Route::post('query_createCV',[credvisitaController::class,'query_createCV']);
+    Route::post('query_crevis_destroy',[credvisitaController::class,'query_crevis_destroy']);
+    Route::get('pdf_creden_v/{id}',[credvisitaController::class,'pdf_creden_v']);
 });
 Route::group(['prefix' => 'Usuarios'], function () {
     Route::get('view_2_user',[ usuarioController::class, 'view_1']);

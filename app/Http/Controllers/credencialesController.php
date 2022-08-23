@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use PDF;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Isset_;
 
 class credencialesController extends Controller
 {
@@ -73,14 +74,23 @@ class credencialesController extends Controller
                 # code...
                 break;
         }
-        $new = new Empleados();
-        // codigo
-        // $new->Codigo = $request->input('nc_cod');
-        $new->Codigo = intval(Empleados::where('aeropuerto', $aero)->max('Codigo')) + 1;
+        $aut_vehiculo_list = ['' => 0, 'P' => 1, 'A' => 3, 'B' => 5, 'C' => 8,];
+        $a = 0;
+        $list_vehi = [];
+        while ($a <= $aut_vehiculo_list[$request->input('nc_t_licencia')]) {
+            // array_push($list_vehi, $a);
+            if (null !== $request->input('tipo_vehiculo_aut' . $a)) {
+                array_push($list_vehi, $request->input('tipo_vehiculo_aut' . $a));
+            }
+            $a += 1;
+        }
 
+        $new = new Empleados();
+        $new->Codigo = intval(Empleados::where('aeropuerto', $aero)->max('Codigo')) + 1;
         $new->tipo = $request->input('nc_tipo');
         $new->CI = $request->input('nc_ci');
         $new->CategoriaLic = $request->input('nc_t_licencia');
+        $new->data_vehi_aut = serialize($list_vehi);
         $new->Nombre = $request->input('nc_nom');
         $new->Paterno = $request->input('nc_pa');
         $new->Materno = $request->input('nc_ma');
@@ -211,7 +221,7 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => 'resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg',
-                        'aero'=>$data['aeropuerto'],
+                        'aero' => $data['aeropuerto'],
 
                     ]
                 );
@@ -225,7 +235,7 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgL[$data['aeropuerto']],
-                        'aero'=>$data['aeropuerto'],
+                        'aero' => $data['aeropuerto'],
 
                     ]
                 );
@@ -239,7 +249,7 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgT[$data['aeropuerto']],
-                        'aero'=>$data['aeropuerto'],
+                        'aero' => $data['aeropuerto'],
                     ]
                 );
                 break;
@@ -256,7 +266,7 @@ class credencialesController extends Controller
                     'M' => $meses[$mfecha],
                     'Y' => $afecha = $fe->format('Y'),
                     'ruta' => $rutaimgLC[$data['aeropuerto']],
-                    'aero'=>$data['aeropuerto'],
+                    'aero' => $data['aeropuerto'],
 
                 ]
             );

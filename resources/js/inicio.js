@@ -37,6 +37,11 @@ $("#btn_menu_B_Empr").click(function (e) {
 });
 $(" #btn_menu_creden_B").click(function (e) {
     e.preventDefault();
+    $.get("credenciales/view_cv_1",
+        function (data, textStatus, jqXHR) {
+            $("#main_cont").html(data);
+        },
+    );
 });
 
 function noti_fi(tp, tx) {

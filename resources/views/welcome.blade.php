@@ -28,14 +28,19 @@
     <!-- dropzone -->
     <link href="{{ asset('resources/Plantilla/dropzone/dist/dropzone.css')}}" rel="stylesheet" />
     <!-- end dropzone -->
-
+    <style>
+       #form_new_creden b{
+            text-transform:capitalize;
+            font-size: 11px;
+        }
+    </style>
 <body>
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
     <div class="wrapper">
-        <header class="header-top" header-theme="light">
+        <header class="header-top" header-theme="dark">
             <div class="container-fluid">
                 <div class="d-flex justify-content-between">
                     <div class="top-menu d-flex align-items-center">
@@ -114,7 +119,7 @@
                                 <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Credenciales</span> </a>
                                 <div class="submenu-content">
                                     <a href="" id="btn_menu_A" class="menu-item">Credenciales</a>
-                                    <a href="" id="btn_menu_creden_B" class="menu-item">Crenciales Vias</a>
+                                    <a href="" id="btn_menu_creden_B" class="menu-item">Crenciales Visita</a>
                                 </div>
                             </div>
 
