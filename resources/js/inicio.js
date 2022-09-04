@@ -1,3 +1,17 @@
+$("#btn_logout").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: "post",
+        url: "logout",
+        data: { _token: $("meta[name=csrf-token]").attr("content") },
+        // dataType: "dataType",
+        success: function (response) {
+            if (response) {
+                window.location.href = "/creden";
+            }
+        },
+    });
+});
 $("#btn_menu_A").click(function (e) {
     e.preventDefault();
     $.ajax({
@@ -37,11 +51,15 @@ $("#btn_menu_B_Empr").click(function (e) {
 });
 $(" #btn_menu_creden_B").click(function (e) {
     e.preventDefault();
-    $.get("credenciales/view_cv_1",
-        function (data, textStatus, jqXHR) {
-            $("#main_cont").html(data);
-        },
-    );
+    $.get("credenciales/view_cv_1", function (data, textStatus, jqXHR) {
+        $("#main_cont").html(data);
+    });
+});
+$(" #btn_menu_viculos").click(function (e) {
+    e.preventDefault();
+    $.get("Vehiculo/view_vei_home", function (data, textStatus, jqXHR) {
+        $("#main_cont").html(data);
+    });
 });
 
 function noti_fi(tp, tx) {

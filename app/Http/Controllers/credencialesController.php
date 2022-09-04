@@ -22,7 +22,7 @@ class credencialesController extends Controller
     }
     public function view_1()
     {
-        switch (Auth::User()->aeropuerto) {
+        switch (session('aero')) {
             case 'LP':
                 $aero = 'LPB';
                 break;
@@ -59,7 +59,7 @@ class credencialesController extends Controller
     public function queryCreate_1(Request $request)
     {
 
-        switch (Auth::User()->aeropuerto) {
+        switch (session('aero')) {
             case 'LP':
                 $aero = 'LPB';
                 break;
@@ -126,7 +126,7 @@ class credencialesController extends Controller
 
     public function queryShow_1()
     {
-        switch (Auth::User()->aeropuerto) {
+        switch (session('aero')) {
             case 'LP':
                 $aero = 'LPB';
                 break;
@@ -290,7 +290,7 @@ class credencialesController extends Controller
     public function query_buscar_A(Request $request)
     {
         $r = $request->input('text');
-        switch (Auth::User()->aeropuerto) {
+        switch (session('aero')) {
             case 'LP':
                 $aero = 'LPB';
                 break;

@@ -27,7 +27,7 @@ class usuarioController extends Controller
             'CodUsr' => $request->input('usu_cod'),
             'Password' => bcrypt($request->input('usu_pass')),
             'Aeropuerto' => $request->input('usu_aero'),
-            'nivel' => $request->input('usu_privilegio')
+            'nivel' => $request->input('usu_privilegio'),
         ]);
 
 

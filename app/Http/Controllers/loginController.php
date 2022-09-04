@@ -16,23 +16,20 @@ class loginController extends Controller
     public function login(Request $request)
     {
         session()->forget('aero');
-
         $request->session()->get('aero');
-        $credenciales = request()->only('codusr', 'password','aeropuerto');
         $u = User::where('codusr', $request->input('codusr'))->first();
         if ($u == null) {
-            return '0';
-        } else if (Auth::attempt($credenciales)) {
-            session(['aero' => $request->input('aeropuerto')]);
-
-            return 'success';
-        } else {
-            return '1';
+            return 0;
+        }
+        $credenciales = request()->only('codusr', 'password', 'aeropuerto');
+        if ($u['aeropuerto'] == 'T') {
+            $credenciales = request()->only('codusr', 'password');
         }
         if (Auth::attempt($credenciales)) {
             session(['aero' => $request->input('aeropuerto')]);
-
             return 'success';
+        } else {
+            return '1';
         }
         return 'fail';
     }

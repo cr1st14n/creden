@@ -18,7 +18,7 @@ class credvisitaController extends Controller
     {
         $aero = ['LP' => 'LPB', 'CB' => 'CBB', 'SC' => 'VVI'];
         // return $aero[ Auth::User()->aeropuerto];
-        return Empleados::where('Tipo', "V")->where('aeropuerto', $aero[Auth::User()->aeropuerto])
+        return Empleados::where('Tipo', "V")->where('aeropuerto', $aero[session('aero')])
             ->select(
                 'Empleados.idEmpleado',
                 'Empleados.Codigo',
@@ -32,13 +32,13 @@ class credvisitaController extends Controller
     public function query_createCV(Request $request)
     {
         $aero = ['LP' => 'LPB', 'CB' => 'CBB', 'SC' => 'VVI'];
-        $cod = Empleados::where('Tipo', "V")->where('aeropuerto', $aero[Auth::User()->aeropuerto])
+        $cod = Empleados::where('Tipo', "V")->where('aeropuerto', $aero[session('aero')])
             ->max('Codigo') + 1;
         $new = new Empleados();
         $new->Codigo = $cod;
         $new->CI = 0;
         $new->Tipo = 'V';
-        $new->aeropuerto = $aero[Auth::User()->aeropuerto];
+        $new->aeropuerto = $aero[session('aero')];
         $new->CodigoTarjeta = $request->input('ncv_codt');
         $new->CodMYFARE = $request->input('ncv_codMy');
         $new->AreasAut = $request->input('ncv_areas_acceso');

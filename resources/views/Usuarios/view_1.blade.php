@@ -74,6 +74,7 @@
                             <div class="form-group">
                                 <span>Aeropuerto</span>
                                 <select name="usu_aero" class="form-control" id="" required>
+                                    <option value="T">Todas</option>
                                     <option value="LP">La Paz</option>
                                     <option value="CB">Cochabamba</option>
                                     <option value="SC">Santa Cruz</option>
