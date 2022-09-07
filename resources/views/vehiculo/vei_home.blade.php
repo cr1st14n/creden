@@ -25,7 +25,7 @@
                             </div> -->
                             <button style="text-align: rigth ;" type="button" id="btn_newVehiculo"
                                 class="btn btn-primary mb-2 "><i class="fa fa-plus-circle"></i> Agregar </button>
-                            <input type="text" class="form-control">
+                            {{-- <input type="text" class="form-control"> --}}
                         </div>
                     </div>
                 </div>
@@ -34,14 +34,13 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Codigo</th>
-                                    <th>Cod ZK</th>
-                                    <th>Cod MYFARE</th>
-                                    <th>Areas</th>
-                                    <th width='20%'>Acciones</th>
+                                    <th style="text-align:right">Codigo</th>
+                                    <th style="text-align:right">Placa</th>
+                                    <th>Responsable</th>
+                                    <th width='10%' style="text-align:center"></th>
                                 </tr>
                             </thead>
-                            <tbody id="view_1_body">
+                            <tbody id="view_1_body_vehi">
                             </tbody>
                         </table>
                     </div>
@@ -53,8 +52,21 @@
                 <div class=" card-header">
                     <h4>Detalle </h4>
                 </div>
-                <div class=" card-body">
-                    <p>Detalle:</p>
+                <div class=" card-body" id="detalle_vehiculo_p">
+                    <p>
+                        Placa: <strong> </strong> <br>
+                        Empresa: <strong> </strong><br>
+                        Motivo: <strong> </strong><br>
+                        Fecha Inicial: <strong> </strong><br>
+                        Fecha Final: <strong> </strong><br>
+                        ------------- <br>
+                        # de Poliza: <strong> </strong><br>
+                        Marca: <strong> </strong><br>
+                        Tipo: <strong> </strong><br>
+                        Color: <strong> </strong><br>
+                        Empresa Aseguradora: <strong> </strong><br>
+                        ------------- <br>
+                    </p>
                 </div>
             </div>
         </div>
@@ -74,76 +86,73 @@
                         <div class="form-group row ">
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <select class="form-control" name="emp" id="emp_c"></select>
+                                    <select class="form-control" name="vi_emp" id="vi_emp"></select>
                                     <b>Empresa</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <input type="text" class="form-control" name="vi_placa" required>
                                     <b>Placa</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <input type="text" class="form-control" name="vi_poliza">
                                     <b># de Poliza</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <input type="text" class="form-control" name="vi_resp" required>
                                     <b>Responsable</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <input type="text" class="form-control" name="vi_empAse">
                                     <b>Empresa Aseguradora</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <input type="text" class="form-control" name="vi_aut" required>
                                     <b>Autorizado por:</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="date" class="form-control" name="ncv_codMy">
+                                    <input type="date" class="form-control" name="vi_feI" required>
                                     <b>Fecha Inicial</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="date" class="form-control" name="ncv_codMy">
+                                    <input type="date" class="form-control" name="vi_fef" required>
                                     <b>Fecha Final</b>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-12">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <input type="text" class="form-control" name="vi_mo" id="vi_mo">
                                     <b>Motivo</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
-
-                            </div>
-                            <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <select class="form-control" name="vi_color" id="vi_color"></select>
                                     <b>Color de Vehiculo</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <select class="form-control" name="vi_tipo" id="vi_tipo"></select>
                                     <b>Tipo de Vehiculo</b>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
-                                    <input type="text" class="form-control" name="ncv_codMy">
+                                    <select class="form-control" name="vi_fab" id="vi_fab"></select>
                                     <b>Fabricante</b>
                                 </div>
                             </div>

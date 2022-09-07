@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vehiculo extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    protected $table='Vehiculos';
+    // public $timestamps = false;
 }

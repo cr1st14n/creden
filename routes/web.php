@@ -66,6 +66,9 @@ Route::group(['prefix' => 'Empresa'], function () {
     Route::post('query_update/{id}', [empresaController::class, 'query_update']);
 });
 Route::group(['prefix' => 'Vehiculo'], function () {
-    Route::get('create_1', [vehiculoController::class,'create_1']);
     Route::get('view_vei_home', [vehiculoController::class, 'view_1']);
+    Route::get('query_list1', [vehiculoController::class, 'query_list1']);
+    Route::get('query_detalle_1', [vehiculoController::class, 'query_detalle_1']);
+    Route::get('create_1', [vehiculoController::class,'create_1']);
+    Route::post('query_store_1',[vehiculoController::class,'store_1']);
 });
