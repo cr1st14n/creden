@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-9" id="option_tipo_lic_veh">
-                                    
+
                                 </div>
                             </div>
                             <h5 class="col-sm-12">Información Adicional</h5>

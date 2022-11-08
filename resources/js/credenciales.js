@@ -35,7 +35,7 @@ $("#nc_t_licencia").change(function (e) {
     e.preventDefault();
     tip = $("#nc_t_licencia").val();
     sel = {
-        "": [],
+        J: { vici: 0, tricilo: 0 },
         P: ["Motocicleta", "Vehiculos Particulares"],
         A: ["Camiotena", "Vagoneta", "Tipo Taxi", "Furgoneta"],
         B: [
@@ -58,6 +58,8 @@ $("#nc_t_licencia").change(function (e) {
             "Autobomba",
         ],
     };
+
+    console.log(sel["J"]);
     console.log(sel[tip]);
     html = sel[tip]
         .map(function (p, i) {
@@ -77,23 +79,25 @@ $("#nc_t_licencia").change(function (e) {
     $("#option_tipo_lic_veh").html(html);
 });
 console.log("que sera sera ");
+
 $("#form_new_creden").submit(function (e) {
     e.preventDefault();
     console.log($("#form_new_creden").serialize());
-    $.ajax({
-        type: "post",
-        url: "credenciales/query_create_1",
-        data: $("#form_new_creden").serialize(),
-        // dataType: "dataType",
-        success: function (response) {
-            if (response) {
-                console.log(response);
-                $("#md_add_credencial").modal("hide");
-                $("#form_new_creden").trigger("reset");
-                queryShow_1();
-            }
-        },
-    });
+    alert("alsjf");
+    // $.ajax({
+    //     type: "post",
+    //     url: "credenciales/query_create_1",
+    //     data: $("#form_new_creden").serialize(),
+    //     // dataType: "dataType",
+    //     success: function (response) {
+    //         if (response) {
+    //             console.log(response);
+    //             $("#md_add_credencial").modal("hide");
+    //             $("#form_new_creden").trigger("reset");
+    //             queryShow_1();
+    //         }
+    //     },
+    // });
 });
 
 $(".upload").on("click", function () {

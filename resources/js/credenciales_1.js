@@ -88,9 +88,9 @@ function fun_credeEmp_camera(param) {
 // * --------- funciones de generar credencial
 function fun_credeEmp_emage(param, tipo) {
     reg = $("#reg_aero").attr("name");
-    if (tipo==1) {
+    if (tipo == 1) {
         var url = `credenciales/pdf_creden_emp_a/${param}/${reg}/${tipo}`;
-    } else if(tipo==2) {
+    } else if (tipo == 2) {
         var url = `credenciales/pdf_creden_emp_a/${param}/${reg}/${tipo}`;
     }
     $("#emb_sec_pdf_creden").attr("src", url);
@@ -132,7 +132,10 @@ function lista_table_creden(res) {
         .map(function (e) {
             var f = new Date(e.Vencimiento);
             f = f.toLocaleDateString();
-
+            rutaPhoto=e.urlphoto;
+            if (e.urlphoto == null) {
+                rutaPhoto = "";
+            }
             return (html = `
                 <tr>
                     <td>${e.Codigo}</td>
@@ -141,13 +144,13 @@ function lista_table_creden(res) {
                     <td>${e.NombEmpresa}</td>
                     <td>${f}</td>
                     <td>
-                        <img src="${e.urlphoto}" width="60px" alt="">
+                        <img src="${rutaPhoto}" width="60px" alt="">
                     </td>
                     <td>${e.NroRenovacion}</td>
                     <td>
                         <div class="btn-group float-md-left mr-1 mb-1">
                             <button class="btn btn-outline-dark btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                
+
                                 <i class="ik ik-chevron-down mr-0 align-middle"></i>
                             </button>
                             <div class="dropdown-menu">

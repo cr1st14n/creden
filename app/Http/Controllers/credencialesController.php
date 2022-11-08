@@ -84,7 +84,6 @@ class credencialesController extends Controller
             }
             $a += 1;
         }
-
         $new = new Empleados();
         $new->Codigo = intval(Empleados::where('aeropuerto', $aero)->max('Codigo')) + 1;
         $new->tipo = $request->input('nc_tipo');
@@ -187,8 +186,12 @@ class credencialesController extends Controller
             'NroRenovacion',
             'Empresa',
             'aeropuerto',
+            'data_vehi_aut',
             'Tipo'
         )->first();
+        $data->data_vehi_aut=unserialize($data->data_vehi_aut);
+        
+        // return $data;
         $empr = Empresas::where('Empresa', $data['Empresa'])->value('NombEmpresa');
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
