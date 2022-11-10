@@ -35,8 +35,7 @@ $("#nc_t_licencia").change(function (e) {
     e.preventDefault();
     tip = $("#nc_t_licencia").val();
     sel = {
-        J: { vici: 0, tricilo: 0 },
-        P: ["Motocicleta", "Vehiculos Particulares"],
+        P: ["Motocicletass", "Vehiculos Particulares"],
         A: ["Camiotena", "Vagoneta", "Tipo Taxi", "Furgoneta"],
         B: [
             "Cinta Transportadora",
@@ -59,14 +58,13 @@ $("#nc_t_licencia").change(function (e) {
         ],
     };
 
-    console.log(sel["J"]);
     console.log(sel[tip]);
     html = sel[tip]
         .map(function (p, i) {
             return (html = `
             <div class="checkbox-fade fade-in-default">
                 <label>
-                    <input type="checkbox" name="tipo_vehiculo_aut${i}" value="${p}">
+                    <input type="checkbox" name="tipo_vehiculo_aut${i}" value="${p}" onchange="saveTipoLicencia('${tip}','${i}')" >
                     <span class="cr">
                         <i class="cr-icon ik ik-check text-warning"></i>
                     </span>
@@ -78,26 +76,41 @@ $("#nc_t_licencia").change(function (e) {
         .join(" ");
     $("#option_tipo_lic_veh").html(html);
 });
-console.log("que sera sera ");
+sel_1 = {
+    P: ["0", "0"],
+    A: ["0", "0", "0", "0"],
+    B: ["0", "0", "0", "0", "0", "0"],
+    C: ["0", "0", "0", "0", "0", "0", "0", "0", "0"],
+};
+function saveTipoLicencia(l, i) {
+    if (sel_1[l][i] == 0) {
+        sel_1[l][i] = 1;
+    } else {
+        sel_1[l][i] = 0;
+    }
+    console.log(sel_1[l], i);
+}
 
 $("#form_new_creden").submit(function (e) {
     e.preventDefault();
     console.log($("#form_new_creden").serialize());
-    alert("alsjf");
-    // $.ajax({
-    //     type: "post",
-    //     url: "credenciales/query_create_1",
-    //     data: $("#form_new_creden").serialize(),
-    //     // dataType: "dataType",
-    //     success: function (response) {
-    //         if (response) {
-    //             console.log(response);
-    //             $("#md_add_credencial").modal("hide");
-    //             $("#form_new_creden").trigger("reset");
-    //             queryShow_1();
-    //         }
-    //     },
-    // });
+    $.ajax({
+        type: "post",
+        url: "credenciales/query_create_1",
+        data: {
+            _token: $("meta[name=csrf-token]").attr("content"),
+            dataa: $("#form_new_creden").serialize(),
+        },
+        // dataType: "dataType",
+        success: function (response) {
+            if (response) {
+                console.log(response);
+                $("#md_add_credencial").modal("hide");
+                $("#form_new_creden").trigger("reset");
+                queryShow_1();
+            }
+        },
+    });
 });
 
 $(".upload").on("click", function () {

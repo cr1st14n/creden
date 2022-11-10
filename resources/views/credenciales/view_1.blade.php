@@ -63,7 +63,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form class="forms-sample" id="form_new_creden">@csrf
+                    <form class="forms-sample" id="form_new_creden">
                         <div class="form-group row ">
                             <div class="col-sm-3">
                                 <div class="form-group small">
@@ -622,3 +622,4 @@
     </div>
 </div>
 <script src="{{ asset('resources/js/credenciales.js')}}"></script>
+

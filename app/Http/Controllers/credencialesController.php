@@ -18,7 +18,7 @@ class credencialesController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     public function view_1()
     {
@@ -58,7 +58,7 @@ class credencialesController extends Controller
     }
     public function queryCreate_1(Request $request)
     {
-
+        return $request;
         switch (session('aero')) {
             case 'LP':
                 $aero = 'LPB';
@@ -190,7 +190,7 @@ class credencialesController extends Controller
             'Tipo'
         )->first();
         $data->data_vehi_aut=unserialize($data->data_vehi_aut);
-        
+
         // return $data;
         $empr = Empresas::where('Empresa', $data['Empresa'])->value('NombEmpresa');
         $fe = Carbon::parse($data['Vencimiento']);

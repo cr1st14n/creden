@@ -166,7 +166,7 @@
             <footer class="footer">
                 <div class="w-100 clearfix">
                     <span class="text-center text-sm-left d-md-inline-block">NAABOL.</span>
-                    <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">vercion 1.1 </span>
+                    <span class="float-none float-sm-right mt-1 mt-sm-0 text-center">vercion 1.2 </span>
                 </div>
             </footer>
         </div>
