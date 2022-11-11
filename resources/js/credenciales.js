@@ -82,29 +82,33 @@ sel_1 = {
     B: ["0", "0", "0", "0", "0", "0"],
     C: ["0", "0", "0", "0", "0", "0", "0", "0", "0"],
 };
+LT='';
 function saveTipoLicencia(l, i) {
+
     if (sel_1[l][i] == 0) {
         sel_1[l][i] = 1;
     } else {
         sel_1[l][i] = 0;
     }
-    console.log(sel_1[l], i);
+    LT=`&nc_lt=${sel_1[l]}&nc_ltt=${l}`;
+    console.log(sel_1[l]);
 }
 
 $("#form_new_creden").submit(function (e) {
     e.preventDefault();
-    console.log($("#form_new_creden").serialize());
+    console.log($("#form_new_creden").serialize()+LT);
     $.ajax({
         type: "post",
         url: "credenciales/query_create_1",
-        data: {
-            _token: $("meta[name=csrf-token]").attr("content"),
-            dataa: $("#form_new_creden").serialize(),
-        },
+        data:  $("#form_new_creden").serialize()+LT,
+        // data: {
+        //     _token: $("meta[name=csrf-token]").attr("content"),
+        //     dataa: $("#form_new_creden").serialize(),
+
         // dataType: "dataType",
         success: function (response) {
-            if (response) {
-                console.log(response);
+            console.log(response);
+            if (response==1) {
                 $("#md_add_credencial").modal("hide");
                 $("#form_new_creden").trigger("reset");
                 queryShow_1();

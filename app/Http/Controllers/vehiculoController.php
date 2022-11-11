@@ -10,6 +10,7 @@ use App\Models\Vehiculo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class vehiculoController extends Controller
 {
@@ -62,5 +63,20 @@ class vehiculoController extends Controller
         $re = $new->save();
         return $re;
 
+    }
+
+    public function pdf_viñeta_1($tipo,$region,$id)
+    {
+        $data= Vehiculo::first();
+        $pdf = pdf::loadView(
+            'vehiculo.vei_vineta',
+            [
+                'lic_1' => 'asfd',
+                'lic_2' => 'asdf',
+                'data' => 'asdf',
+            ]
+        );
+        $pdf->setpaper(array(0, 0, 263, 170), 'portrait');
+        return $pdf->stream('invoice.pdf');
     }
 }

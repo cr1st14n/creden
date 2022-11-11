@@ -63,7 +63,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
-                    <form class="forms-sample" id="form_new_creden">
+                    <form class="forms-sample" id="form_new_creden">@csrf
                         <div class="form-group row ">
                             <div class="col-sm-3">
                                 <div class="form-group small">
@@ -183,7 +183,7 @@
                             <h5 class="col-sm-12">Información Adicional</h5>
                             <div class="col-sm-3">
                                 <div class="form-group small">
-                                    <input type="date" class="form-control" name="nc_f_in">
+                                    <input type="date" class="form-control" name="nc_f_in" >
                                     <b>Fecha de Igreso</b>
                                 </div>
                             </div>

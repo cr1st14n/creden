@@ -20,8 +20,8 @@
 
         body {
             background-color: papayawhip;
-            /* background-image: url("{{asset('resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg')}}"); */
-            background-image: url("{{asset($ruta)}}");
+            /* background-image: url("{{ asset('resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg') }}"); */
+            background-image: url("{{ asset($ruta) }}");
             background-size: cover;
             background-repeat: no-repeat;
         }
@@ -71,6 +71,17 @@
             font-weight: bold;
         }
 
+        p.LCA {
+            position: fixed;
+            right: 20px;
+            top: 50px;
+            font-size: 150px;
+            color: red;
+            font-weight: bold;
+            font-family: sans-serif;
+
+        }
+
 
         img.img_b {
             position: fixed;
@@ -107,25 +118,62 @@
             height: 100%;
 
         }
+
+        .cat {
+            position: fixed;
+            top: 0px;
+            left: 10px;
+            font-size: 40px;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+
+
     </style>
 </head>
 
 <body>
     <div class="ri">
 
-        <!-- <img class="img_a" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"  alt=""> -->
-        <img class="img_b" src="{{asset($data->urlphoto)}}" alt="">
-        <!-- <p class="e">{{$M}}<br>{{$Y}}</p> -->
-        <p class="f">{{$data->Codigo}}</p>
-        @if($aero=='LPB')
-        <p class="a" style="color: black ;"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
+        <!-- <img class="img_a" src="{{ asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg') }}"  alt=""> -->
+        <img class="img_b" src="{{ asset($data->urlphoto) }}" alt="">
+        <!-- <p class="e">{{ $M }}<br>{{ $Y }}</p> -->
+        <p class="f">{{ $data->Codigo }}</p>
+        <p class="LCA">{{ $lic_1 }}</p>
+        @if ($aero == 'LPB')
+            <p class="a" style="color: black ;"> {{ $data->Nombre }} <br>{{ $data->Paterno }}
+                {{ $data->Materno }}<br>{{ $data->Cargo }} <br>{{ $data->Empresa }}</p>
         @else
-        <p class="a" style="color: black ;"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
+            <p class="a" style="color: black ;"> {{ $data->Nombre }} <br>{{ $data->Paterno }}
+                {{ $data->Materno }}<br>{{ $data->Cargo }} <br>{{ $data->Empresa }}</p>
         @endif
-        <p class="b">{{$data->AreasAut}}</p>
-        <p class="ci">{{$data->CI}}</p>
-        <p class="per"><strong style="color: red ;"> @if($data->Herramientas != '') H @endif</strong> <br> @if($data->NroRenovacion != 0) D @endif</p>
-        <img class="s2dapag" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO.jpg')}}" alt="">
+        <p class="b">{{ $data->AreasAut }}</p>
+        <p class="ci">{{ $data->CI }}</p>
+        <p class="per"><strong style="color: red ;">
+                @if ($data->Herramientas != '')
+                    H
+                @endif
+            </strong>
+            <br>
+            @if ($data->NroRenovacion != 0)
+                D
+            @endif
+        </p>
+        <img class="s2dapag" src="{{ asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO1.jpg') }}"
+            alt="">
+        <h5 class="cat">alksdj;
+            tipo licencia 1 <br>
+            tipo licencia 1 <br>
+            tipo licencia 1 <br>
+            tipo licencia 1 <br>
+
+        </h5>
+        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'C39') !!}</div>
+        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'C39') !!}</div></br>
+        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'POSTNET') !!}</div></br>
+        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'PHARMA') !!}</div></br>
+        <div>{!! DNS2D::getBarcodeHTML('4445645656', 'QRCODE') !!}</div></br>
 </body>
 
 </html>

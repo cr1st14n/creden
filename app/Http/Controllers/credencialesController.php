@@ -58,7 +58,7 @@ class credencialesController extends Controller
     }
     public function queryCreate_1(Request $request)
     {
-        return $request;
+        // return session('aero');
         switch (session('aero')) {
             case 'LP':
                 $aero = 'LPB';
@@ -74,18 +74,18 @@ class credencialesController extends Controller
                 # code...
                 break;
         }
-        $aut_vehiculo_list = ['' => 0, 'P' => 1, 'A' => 3, 'B' => 5, 'C' => 8,];
-        $a = 0;
-        $list_vehi = [];
-        while ($a <= $aut_vehiculo_list[$request->input('nc_t_licencia')]) {
-            // array_push($list_vehi, $a);
-            if (null !== $request->input('tipo_vehiculo_aut' . $a)) {
-                array_push($list_vehi, $request->input('tipo_vehiculo_aut' . $a));
-            }
-            $a += 1;
-        }
+        $list_vehi = ['tipo' => $request->input('nc_ltt'), 'list' => $request->input('nc_lt')];
+        // $aut_vehiculo_list = ['' => 0, 'P' => 1, 'A' => 3, 'B' => 5, 'C' => 8,];
+        // $a = 0;
+        // while ($a <= $aut_vehiculo_list[$request->input('nc_t_licencia')]) {
+        //     // array_push($list_vehi, $a);
+        //     if (null !== $request->input('tipo_vehiculo_aut' . $a)) {
+        //         array_push($list_vehi, $request->input('tipo_vehiculo_aut' . $a));
+        //     }
+        //     $a += 1;
+        // }
         $new = new Empleados();
-        $new->Codigo = intval(Empleados::where('aeropuerto', $aero)->max('Codigo')) + 1;
+        $new->Codigo = intval(Empleados::latest('idEmpleado')->where('aeropuerto', $aero)->value('Codigo')) + 1;
         $new->tipo = $request->input('nc_tipo');
         $new->CI = $request->input('nc_ci');
         $new->CategoriaLic = $request->input('nc_t_licencia');
@@ -101,9 +101,9 @@ class credencialesController extends Controller
         $new->Herramientas = $request->input('nc_he');
         $new->AreasAut = $request->input('nc_areas_acceso');
         $new->GSangre = $request->input('nc_gs');
-        $new->Vencimiento = Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
         $new->aeropuerto = $aero;
         $new->estado = $request->input('nc_acci');
+        $new->Vencimiento = Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
         $new->Fecha = Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
         $new->FechaNac =  Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
         $new->EstCivil = $request->input('nc_estCiv');
@@ -118,7 +118,6 @@ class credencialesController extends Controller
         $new->DirTrab = $request->input('nc_12');
         $new->Observacion = $request->input('nc_13');
         $new->data_creden = serialize(array());
-
         $res = $new->save();
         return $res;
     }
@@ -189,8 +188,8 @@ class credencialesController extends Controller
             'data_vehi_aut',
             'Tipo'
         )->first();
-        $data->data_vehi_aut=unserialize($data->data_vehi_aut);
-
+       $data->data_vehi_aut = unserialize($data->data_vehi_aut);
+        $lic_1 = $data->data_vehi_aut['tipo'];
         // return $data;
         $empr = Empresas::where('Empresa', $data['Empresa'])->value('NombEmpresa');
         $fe = Carbon::parse($data['Vencimiento']);
@@ -264,6 +263,8 @@ class credencialesController extends Controller
             $pdf = pdf::loadView(
                 'credenciales.pdf_creden_emp_lc',
                 [
+                    'lic_1' => $data->data_vehi_aut['tipo'],
+                    'lic_2' => $data->data_vehi_aut['list'],
                     'data' => $data,
                     'em' => $empr,
                     'M' => $meses[$mfecha],
