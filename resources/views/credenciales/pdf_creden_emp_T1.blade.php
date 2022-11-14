@@ -29,9 +29,9 @@
         p.a {
             position: relative;
             top: 400px;
-            left: 90px;
-            font-size: 25px;
-            color: white;
+            left: 70px;
+            font-size: 30px;
+            color: rgb(0, 0, 0);
             text-transform: uppercase;
             font-family: sans-serif;
             font-weight: bold;
@@ -64,7 +64,7 @@
 
         p.f {
             position: fixed;
-            right: 75px;
+            right: 80px;
             top: 253px;
             font-size: 25px;
             color: black;
@@ -74,8 +74,8 @@
 
         img.img_b {
             position: fixed;
-            top: 117px;
-            left: 75px;
+            top: 119px;
+            left: 72px;
             width: 230px;
             height: 305px;
 
@@ -83,9 +83,9 @@
 
         .ci {
             position: fixed;
-            top: 555px;
-            left: 60px;
-            font-size: 40px;
+            top: 570px;
+            left: 5px;
+            font-size: 30px;
             font-family: sans-serif;
             font-weight: bold;
         }
@@ -119,7 +119,7 @@
         <p class="f">{{$data->Codigo}}</p>
         <p class="a"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$em}}</p>
         <p class="b">{{$data->AreasAut}}</p>
-        <p class="ci">{{$data->CI}}</p>
+        <p class="ci">N° Cedula Id.{{$data->CI}}</p>
         <p class="per"><strong style="color: red ;"> @if($data->Herramientas != '') H @endif</strong> <br> @if($data->NroRenovacion != 0) D @endif</p>
         <img class="s2dapag" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO.jpg')}}" alt="">
 </body>

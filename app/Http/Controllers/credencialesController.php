@@ -103,9 +103,9 @@ class credencialesController extends Controller
         $new->GSangre = $request->input('nc_gs');
         $new->aeropuerto = $aero;
         $new->estado = $request->input('nc_acci');
-        $new->Vencimiento = Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
-        $new->Fecha = Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
-        $new->FechaNac =  Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
+        $new->Vencimiento = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
+        $new->Fecha = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
+        $new->FechaNac = $retVal = ($request->input('')=='') ? null :    Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
         $new->EstCivil = $request->input('nc_estCiv');
         $new->Sexo = $request->input('nc_sexo');
         $new->Profesion = $request->input('nc_pro');
@@ -185,16 +185,29 @@ class credencialesController extends Controller
             'NroRenovacion',
             'Empresa',
             'aeropuerto',
-            'data_vehi_aut',
+            // 'data_vehi_aut',
             'Tipo'
         )->first();
+
+        switch (strlen($data['Codigo'])) {
+            case 1:
+                $data['Codigo']='000'.$data['Codigo'];
+                break;
+            case 2:
+                $data['Codigo']='00'.$data['Codigo'];
+                break;
+            case 3:
+                $data['Codigo']='0'.$data['Codigo'];
+                break;
+        }
+
         $data->data_vehi_aut = unserialize($data->data_vehi_aut);
         // $lic_1 = $data->data_vehi_aut['tipo'];
         // return $data;
         $empr = Empresas::where('Empresa', $data['Empresa'])->value('NombEmpresa');
-        if (strlen($empr) > 17) {
+        if (strlen($empr) > 18) {
             // Entonces corta la cadena y ponle el sufijo
-            $empr= substr($empr, 0, 17) . '...';
+            $empr= substr($empr, 0, 18) . '...';
         }
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
@@ -202,7 +215,7 @@ class credencialesController extends Controller
         $meses = ['01' => 'ENE', '02' => 'FEB', '03' => 'MAR', '04' => 'ABR', '05' => 'MAY', '06' => 'JUN', '07' => 'JUL', '08' => 'AGO', '09' => 'SEP', '10' => 'OCT', '11' => 'NOV', '12' => 'DIC'];
         // return view('credenciales.pdf_creden_emp_a');
         $rutaimgL = [
-            'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg',
+            'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO1.jpg',
             'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/COCHABAMBA2022.jpg',
             'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/SANTACRUZAMVERSO.jpg',
         ];
