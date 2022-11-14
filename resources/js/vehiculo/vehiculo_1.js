@@ -20,9 +20,11 @@ function list_table(data) {
                 <td style="text-align:right">${p.id}</td>
                 <td style="text-align:right">${p.Placa}</td>
                 <td>${p.Responsable}</td>
-                <td >
-                    <div class="table-actions"style="text-align:center">
-                        <a href="#" onclick="showDetalleVehi(${p.id})"><i class="ik ik-clipboard"></i></a>
+
+                <td>
+                    <div class="table-actions">
+                        <a href="#" onclick="showDetalleVehi(${p.id})"><i class="ik ik-edit-2"></i></a>
+                        <a href="#" onclick="showPdfVin(${p.id})"><i class="ik ik-eye"></i></a>
                     </div>
                 </td>
             </tr>
@@ -98,9 +100,13 @@ $("#form_newVehiculo").submit(function (e) {
             console.log(response);
             if (response) {
                 $("#md_newVehiculo").modal("hide");
-                $('#form_newVehiculo').trigger('reset');
-                list1()
+                $("#form_newVehiculo").trigger("reset");
+                list1();
             }
         },
     });
 });
+function showPdfVin(id) {
+    $("#emb_sec_pdf_vin_v").attr("src", "Vehiculo/pdf_viñeta_1/1/1/"+id);
+    $("#md_show_vin").modal("show");
+}

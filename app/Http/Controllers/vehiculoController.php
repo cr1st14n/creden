@@ -24,11 +24,33 @@ class vehiculoController extends Controller
     }
     public function query_list1()
     {
-        return Vehiculo::select('id','Placa','Responsable',)->get();
+        // switch (session('aero')) {
+        //     case 'LP':
+        //         $aero = 'LPB';
+        //         break;
+        //     case 'CB':
+        //         $aero = 'CBB';
+        //         break;
+        //     case 'SC':
+        //         $aero = 'VVI';
+        //         break;
+
+        //     default:
+        //         # code...
+        //         break;
+        // }
+        return Vehiculo::select('id', 'Placa', 'Responsable',)->get();
     }
     public function query_detalle_1(Request $request)
     {
-        return Vehiculo::where('id',$request->input('id'))->first();
+        $data = Vehiculo::where('id', $request->input('id'))
+            ->join('Marca','Marca.Codigo ','Vehiculos.Marca')
+            ->join('Tipo','Tipo.Codigo ','Vehiculos.Tipo')
+            ->join('Color','Color.Codigo ','Vehiculos.Color')
+            ->first();
+        $data['FechaIniPer'] = Carbon::parse($data['FechaIniPer'])->format('d-m-Y');
+        $data['FechaFinPer'] = Carbon::parse($data['FechaFinPer'])->format('d-m-Y');
+        return $data;
     }
     public function create_1()
     {
@@ -47,36 +69,57 @@ class vehiculoController extends Controller
         $new->NroPoliza = $request->input('vi_poliza');
         $new->Responsable = $request->input('vi_resp');
         $new->EmpresaAseg = $request->input('vi_empAse');
-        $new->FechaIniPer =Carbon::parse($request->input('vi_feI'))->format('Y-d-m H:i:s');
-        $new->FechaFinPer =Carbon::parse($request->input('vi_fef'))->format('Y-d-m H:i:s');
+        $new->FechaIniPer = Carbon::parse($request->input('vi_feI'))->format('Y-d-m H:i:s');
+        $new->FechaFinPer = Carbon::parse($request->input('vi_fef'))->format('Y-d-m H:i:s');
         $new->FechaSolic = Carbon::now()->format('Y-d-m H:i:s');
         $new->Motivo = $request->input('vi_mo');
         $new->AutorizadoPor = $request->input('vi_aut');
         $new->Color = $request->input('vi_color');
         $new->Tipo = $request->input('vi_tipo');
         $new->Marca = $request->input('vi_fab');
-        $new->ca_cod_usu=Auth::user()->id;
-        $new->Vicom="0";
-        $new->Banderola="0";
-        $new->Estado=1;
+        $new->ca_cod_usu = Auth::user()->id;
+        $new->Vicom = "0";
+        $new->Banderola = "0";
+        $new->Estado = 1;
         // $new->created_at=Carbon::now()->format('Y-d-m H:i:s');
         $re = $new->save();
         return $re;
-
     }
 
-    public function pdf_viñeta_1($tipo,$region,$id)
+    public function pdf_viñeta_1($tipo, $region, $id)
     {
-        $data= Vehiculo::first();
+        $data = Vehiculo::where('Vehiculos.id', $id)
+        ->join('Marca','Marca.Codigo ','Vehiculos.Marca')
+        ->join('Tipo','Tipo.Codigo ','Vehiculos.Tipo')
+        ->join('Color','Color.Codigo ','Vehiculos.Color')
+        ->join('Empresas','Empresas.Empresa','Vehiculos.Empresa')
+        ->first();
+        // return view('vehiculo.vei_vineta',
+        // [
+        //     'id' => $data->id,
+        //     'Empresa' => $data->Empresa,
+        //     'Marca' => $data->Marca,
+        //     'Placa' => $data->Placa,
+        //     'Tipo' => $data->Tipo,
+        //     'Color' => $data->Color,
+        //     'Vence' => $data->FechaFinPer,
+        //     'Areas' => '',
+        // ]);
         $pdf = pdf::loadView(
             'vehiculo.vei_vineta',
             [
-                'lic_1' => 'asfd',
-                'lic_2' => 'asdf',
-                'data' => 'asdf',
+                'id' => $data->id,
+                'Empresa' => $data->NombEmpresa,
+                'Marca' => $data->Marca,
+                'Placa' => $data->Placa,
+                'Tipo' => $data->Tipo,
+                'Color' => $data->Color,
+                'Vence' => $data->FechaFinPer,
+                'Vence' => Carbon::parse($data->FechaFinPer)->format('d-m-Y'),
+                'Areas' => '',
             ]
         );
-        $pdf->setpaper(array(0, 0, 263, 170), 'portrait');
+        $pdf->setpaper(array(0, 0, 170, 263), 'landscape');
         return $pdf->stream('invoice.pdf');
     }
 }

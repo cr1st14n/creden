@@ -188,10 +188,14 @@ class credencialesController extends Controller
             'data_vehi_aut',
             'Tipo'
         )->first();
-       $data->data_vehi_aut = unserialize($data->data_vehi_aut);
-        $lic_1 = $data->data_vehi_aut['tipo'];
+        $data->data_vehi_aut = unserialize($data->data_vehi_aut);
+        // $lic_1 = $data->data_vehi_aut['tipo'];
         // return $data;
         $empr = Empresas::where('Empresa', $data['Empresa'])->value('NombEmpresa');
+        if (strlen($empr) > 17) {
+            // Entonces corta la cadena y ponle el sufijo
+            $empr= substr($empr, 0, 17) . '...';
+        }
         $fe = Carbon::parse($data['Vencimiento']);
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
