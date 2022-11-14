@@ -77,9 +77,9 @@ class vehiculoController extends Controller
         $new->Color = $request->input('vi_color');
         $new->Tipo = $request->input('vi_tipo');
         $new->Marca = $request->input('vi_fab');
-        $new->ca_cod_usu = Auth::user()->id;
         $new->Vicom = "0";
         $new->Banderola = "0";
+        $new->ca_cod_usu = Auth::user()->id;
         $new->Estado = 1;
         // $new->created_at=Carbon::now()->format('Y-d-m H:i:s');
         $re = $new->save();

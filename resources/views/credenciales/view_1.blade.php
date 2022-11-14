@@ -72,7 +72,16 @@
                                         <option value="L">Local</option>
                                         <option value="T">Temporal</option>
                                     </select>
-                                    <b>Tipo credencial</b>
+                                    <b>Tipo de Credencial</b>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group small">
+                                    <select class="form-control" name="nc_aeropuerto">
+                                        <option value="LPB">EL ALTO</option>
+                                        <option value="CIJ">CAP. AV. ANIBAL ARAB FADUL</option>
+                                    </select>
+                                    <b>Aeropuerto </b>
                                 </div>
                             </div>
                             <div class="col-sm-3">

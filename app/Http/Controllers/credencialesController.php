@@ -22,6 +22,7 @@ class credencialesController extends Controller
     }
     public function view_1()
     {
+        // return session('aero');
         switch (session('aero')) {
             case 'LP':
                 $aero = 'LPB';
@@ -102,6 +103,7 @@ class credencialesController extends Controller
         $new->AreasAut = $request->input('nc_areas_acceso');
         $new->GSangre = $request->input('nc_gs');
         $new->aeropuerto = $aero;
+        $new->aeropuerto = $request->input('nc_aeropuerto');
         $new->estado = $request->input('nc_acci');
         $new->Vencimiento = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
         $new->Fecha = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
