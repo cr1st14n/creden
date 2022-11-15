@@ -55,7 +55,7 @@
         p.e {
             position: fixed;
             right: 10px;
-            top: 50px;
+            top: 70px;
             font-size: 55px;
             color: red;
             font-family: Arial, Helvetica, sans-serif;
