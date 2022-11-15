@@ -121,17 +121,6 @@
                     }
                 }
             });
-            $.ajax({
-                url: "log1",
-                data: $('#formLogin').serializeArray(),
-                type: "POST",
-                // dataType: 'json',
-                success: function(e) {
-                    console.log(e);
-
-
-                }
-            }).fail();
         }
     </script>
 </body>
