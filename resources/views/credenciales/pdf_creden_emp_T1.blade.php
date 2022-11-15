@@ -84,7 +84,7 @@
         .ci {
             position: fixed;
             top: 570px;
-            left: 5px;
+            left: 60px;
             font-size: 30px;
             font-family: sans-serif;
             font-weight: bold;
@@ -119,7 +119,7 @@
         <p class="f">{{$data->Codigo}}</p>
         <p class="a"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$em}}</p>
         <p class="b">{{$data->AreasAut}}</p>
-        <p class="ci">N° Cedula Id.{{$data->CI}}</p>
+        <p class="ci">{{$data->CI}}</p>
         <p class="per"><strong style="color: red ;"> @if($data->Herramientas != '') H @endif</strong> <br> @if($data->NroRenovacion != 0) D @endif</p>
         <img class="s2dapag" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO.jpg')}}" alt="">
 </body>

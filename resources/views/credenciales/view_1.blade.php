@@ -67,7 +67,7 @@
                         <div class="form-group row ">
                             <div class="col-sm-3">
                                 <div class="form-group small">
-                                    <select class="form-control" name="nc_tipo">
+                                    <select class="form-control form-bg-danger" name="nc_tipo">
                                         <option value="L">Local</option>
                                         <option value="T">Temporal</option>
                                         <option value="N"><strong class=" text-danger">Nacional</strong> </option>
@@ -77,29 +77,30 @@
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group small">
-                                    <select class="form-control" name="nc_aeropuerto">
+                                    <select class="form-control form-bg-primary" name="nc_aeropuerto">
                                         <option value="LPB">EL ALTO</option>
                                         <option value="CIJ">CAP. AV. ANIBAL ARAB FADUL</option>
                                     </select>
                                     <b>Aeropuerto </b>
                                 </div>
                             </div>
+                            <div class=" col-sm-6"></div>
                             <div class="col-sm-3">
                                 <div class="form-group  small ">
-                                    <input type="text" class="form-control form-control-sm " name="nc_ci" required maxlength="12">
-                                    <b style="text-transform: upercase ;">Carnet de Indentidad</b>
+                                    <input type="text" class="form-control form-control-sm " name="nc_ci" required maxlength="14" placeholder="######## EXPEDIDO">
+                                    <b style="text-transform: upercase ;">Carnet de Indentidad <strong class=" text-danger">*</strong> </b>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group small">
                                     <input type="text" class="form-control" name="nc_nom" required>
-                                    <b>Nombre</b>
+                                    <b>Nombre <strong class=" text-danger">*</strong> </b>
                                 </div>
                             </div>
                             <div class="col-sm-3">
                                 <div class="form-group small">
                                     <input type="text" class="form-control" name="nc_pa">
-                                    <b>Ap. Paterno</b>
+                                    <b>Ap. Paterno <strong class=" text-danger">*</strong> </b>
                                 </div>
                             </div>
                             <div class="col-sm-3">
