@@ -103,7 +103,7 @@ class credencialesController extends Controller
         $new->AreasAut = $request->input('nc_areas_acceso');
         $new->GSangre = $request->input('nc_gs');
         $new->aeropuerto = $aero;
-        $new->aeropuerto_2 = $request->input('nc_aeropuerto');
+        $new->Aeropuerto_2 = $request->input('nc_aeropuerto');
         $new->estado = $request->input('nc_acci');
         $new->Vencimiento = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
         $new->Fecha = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
@@ -187,7 +187,7 @@ class credencialesController extends Controller
             'NroRenovacion',
             'Empresa',
             'aeropuerto',
-            'aeropuerto_2',
+            'Aeropuerto_2',
             // 'data_vehi_aut',
             'Tipo'
         )->first();
@@ -257,7 +257,7 @@ class credencialesController extends Controller
                         'em' => $empr,
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
-                        'ruta' => $rutaimgL[$data['aeropuerto_2']],
+                        'ruta' => $rutaimgL[$data['Aeropuerto_2']],
                         'aero' => $data['aeropuerto'],
 
                     ]
@@ -271,7 +271,7 @@ class credencialesController extends Controller
                         'em' => $empr,
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
-                        'ruta' => $rutaimgT[$data['aeropuerto_2']],
+                        'ruta' => $rutaimgT[$data['Aeropuerto_2']],
                         'aero' => $data['aeropuerto'],
                     ]
                 );
@@ -290,7 +290,7 @@ class credencialesController extends Controller
                     'em' => $empr,
                     'M' => $meses[$mfecha],
                     'Y' => $afecha = $fe->format('Y'),
-                    'ruta' => $rutaimgLC[$data['aeropuerto_2']],
+                    'ruta' => $rutaimgLC[$data['Aeropuerto_2']],
                     'aero' => $data['aeropuerto'],
 
                 ]
