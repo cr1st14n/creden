@@ -244,7 +244,8 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => 'resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg',
-                        'aero' => $data['aeropuerto'],
+                        'aero' => $data['Aeropuerto_2'],
+                        'tipo'=> $data['Tipo'],
 
                     ]
                 );
@@ -258,7 +259,8 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgL[$data['Aeropuerto_2']],
-                        'aero' => $data['aeropuerto'],
+                        'aero' => $data['Aeropuerto_2'],
+                        'tipo'=> $data['Tipo'],
 
                     ]
                 );
@@ -272,7 +274,8 @@ class credencialesController extends Controller
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgT[$data['Aeropuerto_2']],
-                        'aero' => $data['aeropuerto'],
+                        'aero' => $data['Aeropuerto_2'],
+                        'tipo'=> $data['Tipo'],
                     ]
                 );
                 break;
@@ -291,7 +294,7 @@ class credencialesController extends Controller
                     'M' => $meses[$mfecha],
                     'Y' => $afecha = $fe->format('Y'),
                     'ruta' => $rutaimgLC[$data['Aeropuerto_2']],
-                    'aero' => $data['aeropuerto'],
+                    'aero' => $data['Aeropuerto_2'],
 
                 ]
             );
