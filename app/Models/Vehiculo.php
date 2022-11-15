@@ -9,5 +9,5 @@ class Vehiculo extends Model
 {
     // use HasFactory;
     protected $table='Vehiculos';
-    // public $timestamps = false;
+    public $timestamps = false;
 }

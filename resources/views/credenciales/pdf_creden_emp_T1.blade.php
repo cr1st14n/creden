@@ -33,8 +33,7 @@
             font-size: 30px;
             color: rgb(0, 0, 0);
             @if ($tipo == 'N')color: white;
-            @endif
-            text-transform: uppercase;
+            @endiftext-transform: uppercase;
             font-family: sans-serif;
             font-weight: bold;
         }
@@ -120,7 +119,8 @@
         <p class="e">{{ $M }}<br>{{ $Y }}</p>
         <p class="f">{{ $data->Codigo }}</p>
         <p class="a"> {{ $data->Nombre }} <br>{{ $data->Paterno }} {{ $data->Materno }}<br>{{ $data->Cargo }}
-            <br>{{ $em }}</p>
+            <br>{{ $em }}
+        </p>
         <p class="b">{{ $data->AreasAut }}</p>
         <p class="ci">{{ $data->CI }}</p>
         <p class="per"><strong style="color: red ;">
