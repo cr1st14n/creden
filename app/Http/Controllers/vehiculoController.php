@@ -69,9 +69,9 @@ class vehiculoController extends Controller
         $new->NroPoliza = $request->input('vi_poliza');
         $new->Responsable = $request->input('vi_resp');
         $new->EmpresaAseg = $request->input('vi_empAse');
-        $new->FechaIniPer = Carbon::parse($request->input('vi_feI'))->format('Y-d-m');
-        $new->FechaFinPer = Carbon::parse($request->input('vi_fef'))->format('Y-d-m');
-        $new->FechaSolic = Carbon::now()->format('Y-d-m H:i:s');
+        $new->FechaIniPer = Carbon::parse($request->input('vi_feI'))->format('Y-m-d H:i:s');
+        $new->FechaFinPer = Carbon::parse($request->input('vi_fef'))->format('Y-m-d H:i:s');
+        $new->FechaSolic = null;
         $new->Motivo = $request->input('vi_mo');
         $new->AutorizadoPor = $request->input('vi_aut');
         $new->Color = $request->input('vi_color');
@@ -82,6 +82,7 @@ class vehiculoController extends Controller
         $new->ca_cod_usu = Auth::user()->id;
         $new->Estado = 1;
         // $new->created_at=Carbon::now()->format('Y-d-m H:i:s');
+        // return $new;
         $re = $new->save();
         return $re;
     }
