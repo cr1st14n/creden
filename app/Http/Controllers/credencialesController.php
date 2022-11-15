@@ -103,7 +103,7 @@ class credencialesController extends Controller
         $new->AreasAut = $request->input('nc_areas_acceso');
         $new->GSangre = $request->input('nc_gs');
         $new->aeropuerto = $aero;
-        $new->aeropuerto = $request->input('nc_aeropuerto');
+        $new->aeropuerto_2 = $request->input('nc_aeropuerto');
         $new->estado = $request->input('nc_acci');
         $new->Vencimiento = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
         $new->Fecha = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
@@ -187,6 +187,7 @@ class credencialesController extends Controller
             'NroRenovacion',
             'Empresa',
             'aeropuerto',
+            'aeropuerto_2',
             // 'data_vehi_aut',
             'Tipo'
         )->first();
@@ -217,7 +218,8 @@ class credencialesController extends Controller
         $meses = ['01' => 'ENE', '02' => 'FEB', '03' => 'MAR', '04' => 'ABR', '05' => 'MAY', '06' => 'JUN', '07' => 'JUL', '08' => 'AGO', '09' => 'SEP', '10' => 'OCT', '11' => 'NOV', '12' => 'DIC'];
         // return view('credenciales.pdf_creden_emp_a');
         $rutaimgL = [
-            'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO1.jpg',
+            'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg',
+            'CIJ' => 'resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO1.jpg',
             'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/COCHABAMBA2022.jpg',
             'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/SANTACRUZAMVERSO.jpg',
         ];
@@ -255,7 +257,7 @@ class credencialesController extends Controller
                         'em' => $empr,
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
-                        'ruta' => $rutaimgL[$data['aeropuerto']],
+                        'ruta' => $rutaimgL[$data['aeropuerto_2']],
                         'aero' => $data['aeropuerto'],
 
                     ]
@@ -269,7 +271,7 @@ class credencialesController extends Controller
                         'em' => $empr,
                         'M' => $meses[$mfecha],
                         'Y' => $afecha = $fe->format('Y'),
-                        'ruta' => $rutaimgT[$data['aeropuerto']],
+                        'ruta' => $rutaimgT[$data['aeropuerto_2']],
                         'aero' => $data['aeropuerto'],
                     ]
                 );
@@ -288,7 +290,7 @@ class credencialesController extends Controller
                     'em' => $empr,
                     'M' => $meses[$mfecha],
                     'Y' => $afecha = $fe->format('Y'),
-                    'ruta' => $rutaimgLC[$data['aeropuerto']],
+                    'ruta' => $rutaimgLC[$data['aeropuerto_2']],
                     'aero' => $data['aeropuerto'],
 
                 ]

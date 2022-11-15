@@ -68,9 +68,9 @@
                             <div class="col-sm-3">
                                 <div class="form-group small">
                                     <select class="form-control" name="nc_tipo">
-                                        <option value="N">Nacional</option>
                                         <option value="L">Local</option>
                                         <option value="T">Temporal</option>
+                                        <option value="N"><strong class=" text-danger">Nacional</strong> </option>
                                     </select>
                                     <b>Tipo de Credencial</b>
                                 </div>
