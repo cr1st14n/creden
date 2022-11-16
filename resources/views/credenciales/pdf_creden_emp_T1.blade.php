@@ -31,11 +31,12 @@
             top: 400px;
             left: 70px;
             font-size: 30px;
-            color: rgb(0, 0, 0);
-            @if ($tipo == 'N')color: white;
-            @endiftext-transform: uppercase;
+            text-transform: uppercase;
             font-family: sans-serif;
             font-weight: bold;
+            color: rgb(0, 0, 0);
+            @if ($tipo == 'N')color: white;
+            @endif
         }
 
         p.b {

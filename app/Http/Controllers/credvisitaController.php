@@ -45,7 +45,7 @@ class credvisitaController extends Controller
         $new->CodigoTarjeta = $request->input('ncv_codt');
         $new->CodMYFARE = $request->input('ncv_codMy');
         $new->AreasAut = $request->input('ncv_areas_acceso');
-        $new->Vencimiento = ($request->input('ncv_fechaLimite') == '') ? null :    Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
+        $new->Vencimiento = ($request->input('ncv_fechaLimite') == '') ? null :    Carbon::parse($request->input('ncv_fechaLimite'))->format('Y-m-d H:i');
         $res = $new->save();
         return $res;
     }

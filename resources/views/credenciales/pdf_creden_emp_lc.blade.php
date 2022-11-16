@@ -52,6 +52,20 @@
 
         }
 
+        p.l1 {
+            position: fixed;
+            left: 50px;
+            width: 10px;
+            word-wrap: break-word;
+            text-align: center;
+            line-height: 58px;
+            font-size: 20px;
+            top: 77px;
+            font-family: sans-serif;
+            font-weight: bold;
+
+        }
+
         p.e {
             position: fixed;
             right: 10px;
@@ -64,7 +78,7 @@
 
         p.f {
             position: fixed;
-            right: 80px;
+            right: 20px;
             top: 130px;
             font-size: 30px;
             color: black;
@@ -128,8 +142,54 @@
             font-weight: bold;
         }
 
-
-
+        p.ll1 {
+            position: fixed;
+            left: 50px;
+            width: 10px;
+            top: 85px;
+            font-size: 20px;
+            line-height: 22px;
+            word-wrap: break-word;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        p.ll2 {
+            position: fixed;
+            left: 50px;
+            width: 10px;
+            top: 200px;
+            font-size: 20px;
+            line-height: 22px;
+            word-wrap: break-word;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        p.ll3 {
+            position: fixed;
+            left: 50px;
+            width: 10px;
+            top: 380px;
+            font-size: 20px;
+            line-height: 21px;
+            word-wrap: break-word;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+        p.ll4 {
+            position: fixed;
+            left: 50px;
+            width: 10px;
+            top: 600px;
+            font-size: 20px;
+            line-height: 22px;
+            word-wrap: break-word;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -139,7 +199,7 @@
         <!-- <img class="img_a" src="{{ asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg') }}"  alt=""> -->
         <img class="img_b" src="{{ asset($data->urlphoto) }}" alt="">
         <!-- <p class="e">{{ $M }}<br>{{ $Y }}</p> -->
-        <p class="f">{{ $data->Codigo }}</p>
+        <p class="f">{{ $data->Codigo }}-{{$aero}} </p>
         <p class="LCA">{{ $lic_1 }}</p>
         @if ($aero == 'LPB')
             <p class="a" style="color: black ;"> {{ $data->Nombre }} <br>{{ $data->Paterno }}
@@ -160,20 +220,13 @@
                 D
             @endif
         </p>
-        <img class="s2dapag" src="{{ asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSO1.jpg') }}"
+        <img class="s2dapag" src="{{ asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSOlc.jpg') }}"
             alt="">
-        <h5 class="cat">alksdj;
-            tipo licencia 1 <br>
-            tipo licencia 1 <br>
-            tipo licencia 1 <br>
-            tipo licencia 1 <br>
 
-        </h5>
-        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'C39') !!}</div>
-        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'C39') !!}</div></br>
-        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'POSTNET') !!}</div></br>
-        <div>{!! DNS1D::getBarcodeHTML('4445645656', 'PHARMA') !!}</div></br>
-        <div>{!! DNS2D::getBarcodeHTML('4445645656', 'QRCODE') !!}</div></br>
+        <p class="ll1">@if ($lic_1=='A') {{ $lic_2 }}  @endif</p>
+        <p class="ll2">@if ($lic_1=='B') {{ $lic_2 }}  @endif</p>
+        <p class="ll3">@if ($lic_1=='C') {{ $lic_2 }}  @endif</p>
+        <p class="ll4">@if ($lic_1=='P') {{ $lic_2 }}  @endif</p>
 </body>
 
 </html>

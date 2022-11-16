@@ -105,9 +105,9 @@ class credencialesController extends Controller
         $new->aeropuerto = $aero;
         $new->Aeropuerto_2 = $request->input('nc_aeropuerto');
         $new->estado = $request->input('nc_acci');
-        $new->Vencimiento = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_fv'))->format('Y-d-m H:i:s');
-        $new->Fecha = $retVal = ($request->input('')=='') ? null :   Carbon::parse($request->input('nc_f_in'))->format('Y-d-m H:i:s');
-        $new->FechaNac = $retVal = ($request->input('')=='') ? null :    Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
+        $new->Vencimiento = $retVal = ($request->input('') == '') ? null :   Carbon::parse($request->input('nc_fv'))->format('Y-m-d H:i:s');
+        $new->Fecha = $retVal = ($request->input('') == '') ? null :   Carbon::parse($request->input('nc_f_in'))->format('Y-m-d H:i:s');
+        $new->FechaNac = $retVal = ($request->input('') == '') ? null :    Carbon::parse($request->input('nc_FNac'))->format('Y-m-d H:i:s');
         $new->EstCivil = $request->input('nc_estCiv');
         $new->Sexo = $request->input('nc_sexo');
         $new->Profesion = $request->input('nc_pro');
@@ -169,7 +169,7 @@ class credencialesController extends Controller
     }
 
     // * formato de credencial
-    public function pdf_creden_emp_a($e, $c, $tipo)
+    public function pdf_creden_emp_a($e, $tipo)
     {
         $data = Empleados::where('idEmpleado', $e)->select(
             'Codigo',
@@ -188,29 +188,27 @@ class credencialesController extends Controller
             'Empresa',
             'aeropuerto',
             'Aeropuerto_2',
-            // 'data_vehi_aut',
+            'data_vehi_aut',
             'Tipo'
         )->first();
 
         switch (strlen($data['Codigo'])) {
             case 1:
-                $data['Codigo']='000'.$data['Codigo'];
+                $data['Codigo'] = '000' . $data['Codigo'];
                 break;
             case 2:
-                $data['Codigo']='00'.$data['Codigo'];
+                $data['Codigo'] = '00' . $data['Codigo'];
                 break;
             case 3:
-                $data['Codigo']='0'.$data['Codigo'];
+                $data['Codigo'] = '0' . $data['Codigo'];
                 break;
         }
 
-        $data->data_vehi_aut = unserialize($data->data_vehi_aut);
-        // $lic_1 = $data->data_vehi_aut['tipo'];
-        // return $data;
+
         $empr = Empresas::where('Empresa', $data['Empresa'])->value('NombEmpresa');
         if (strlen($empr) > 18) {
             // Entonces corta la cadena y ponle el sufijo
-            $empr= substr($empr, 0, 18) . '...';
+            $empr = substr($empr, 0, 18) . '...';
         }
         $fe = Carbon::parse($data['Vencimiento']);
         $dfecha = $fe->format('d');
@@ -231,6 +229,7 @@ class credencialesController extends Controller
         ];
         $rutaimgLC = [
             'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/CONDUCCION-PLATAFORMA-LP.jpg',
+            'CIJ' => 'resources/plantilla/CREDENCIALESFOTOS/LPB-CIJ-LC.jpg',
             'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/CONDUCCION-PLATAFORMA-CBB.jpg',
             'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/CONDUCCION-PLATAFORMA-VVI.jpg',
         ];
@@ -246,7 +245,7 @@ class credencialesController extends Controller
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => 'resources/plantilla/CREDENCIALESFOTOS/NACIONALAMVERSO.jpg',
                         'aero' => $data['Aeropuerto_2'],
-                        'tipo'=> $data['Tipo'],
+                        'tipo' => $data['Tipo'],
 
                     ]
                 );
@@ -261,7 +260,7 @@ class credencialesController extends Controller
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgL[$data['Aeropuerto_2']],
                         'aero' => $data['Aeropuerto_2'],
-                        'tipo'=> $data['Tipo'],
+                        'tipo' => $data['Tipo'],
 
                     ]
                 );
@@ -276,7 +275,7 @@ class credencialesController extends Controller
                         'Y' => $afecha = $fe->format('Y'),
                         'ruta' => $rutaimgT[$data['Aeropuerto_2']],
                         'aero' => $data['Aeropuerto_2'],
-                        'tipo'=> $data['Tipo'],
+                        'tipo' => $data['Tipo'],
                     ]
                 );
                 break;
@@ -285,11 +284,19 @@ class credencialesController extends Controller
                 break;
         }
         if ($tipo == 2) {
+            if ($data->data_vehi_aut == null && $tipo == 2) {
+                return;
+            }
+            $data->data_vehi_aut = unserialize($data->data_vehi_aut);
+
+            $q = str_replace(',', '', $data->data_vehi_aut['list']);
+            $q = str_replace('1', 'X', $q);
+            $q = str_replace('0', '_', $q);
             $pdf = pdf::loadView(
                 'credenciales.pdf_creden_emp_lc',
                 [
                     'lic_1' => $data->data_vehi_aut['tipo'],
-                    'lic_2' => $data->data_vehi_aut['list'],
+                    'lic_2' => $q,
                     'data' => $data,
                     'em' => $empr,
                     'M' => $meses[$mfecha],
@@ -303,6 +310,14 @@ class credencialesController extends Controller
         $pdf->setpaper(array(0, 0, 341, 527), 'portrait');
         return $pdf->stream('invoice.pdf');
     }
+    public function query_cons_1(Request $request)
+    {
+        return Empleados::where('idEmpleado', $request->input('id'))->value('data_vehi_aut');
+        if (Empleados::where('idEmpleado', $request->input('id'))->select('data_vehi_aut')->first() == '') {
+            return false;
+        }
+        return true;
+    }
 
     public function query_destroy_credencial(Request $request)
     {
@@ -315,6 +330,10 @@ class credencialesController extends Controller
         // return Carbon::parse($emp['Vencimiento'])->format('Y-d-m');
         // array_push($emp,['ven'=>Carbon::parse($emp['Vencimiento'])->format('Y-d-m')]);
         return ['data' => $emp, 'ven' => Carbon::parse($emp['Vencimiento'])->format('Y-d-m'), 'nac' => Carbon::parse($emp['FechaNac'])->format('Y-d-m'), 'ing' => Carbon::parse($emp['Fecha'])->format('Y-d-m')];
+    }
+    public function query_update(Request $request)
+    {
+        return 'asldfj';
     }
     public function query_buscar_A(Request $request)
     {

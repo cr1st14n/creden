@@ -69,8 +69,8 @@ class vehiculoController extends Controller
         $new->NroPoliza = $request->input('vi_poliza');
         $new->Responsable = $request->input('vi_resp');
         $new->EmpresaAseg = $request->input('vi_empAse');
-        $new->FechaIniPer = Carbon::parse($request->input('vi_feI'))->format('Y-m-d H:i:s');
-        $new->FechaFinPer = Carbon::parse($request->input('vi_fef'))->format('Y-m-d H:i:s');
+        $new->FechaIniPer = Carbon::parse($request->input('vi_feI'))->format('Y-m-d H:i');
+        $new->FechaFinPer = Carbon::parse($request->input('vi_fef'))->format('Y-m-d H:i');
         $new->FechaSolic = null;
         $new->Motivo = $request->input('vi_mo');
         $new->AutorizadoPor = $request->input('vi_aut');

@@ -53,6 +53,18 @@ function fun_credeEmp_edit(param) {
         },
     });
 }
+
+function update_creden() {
+    $.ajax({
+        type: "post",
+        url: "credenciales/query_update",
+        data: $("#form_update_creden").serialize(),
+        // dataType: "boolean",
+        success: function (response) {
+            console.log(response);
+        },
+    });
+}
 function fun_credeEmp_delete(param) {
     var_delete_credencial = param;
     $("#md_show_deleteConfirm").modal("show");
@@ -87,14 +99,27 @@ function fun_credeEmp_camera(param) {
 
 // * --------- funciones de generar credencial
 function fun_credeEmp_emage(param, tipo) {
-    reg = $("#reg_aero").attr("name");
     if (tipo == 1) {
-        var url = `credenciales/pdf_creden_emp_a/${param}/${reg}/${tipo}`;
+        var url = `credenciales/pdf_creden_emp_a/${param}/${tipo}`;
+        $("#emb_sec_pdf_creden").attr("src", url);
+        $("#md_show_credencial").modal("show");
     } else if (tipo == 2) {
-        var url = `credenciales/pdf_creden_emp_a/${param}/${reg}/${tipo}`;
+        console.log("tipo_2");
+        $.get(
+            "credenciales/query_cons_1",
+            { id: param },
+            function (data, textStatus, jqXHR) {
+                console.log(data);
+                if (data) {
+                    var url = `credenciales/pdf_creden_emp_a/${param}/${tipo}`;
+                    $("#emb_sec_pdf_creden").attr("src", url);
+                    $("#md_show_credencial").modal("show");
+                    return;
+                }
+                noti_fi(3, "Sin tipo de credencial Registrado!");
+            }
+        );
     }
-    $("#emb_sec_pdf_creden").attr("src", url);
-    $("#md_show_credencial").modal("show");
 }
 // * =======l
 
@@ -132,7 +157,7 @@ function lista_table_creden(res) {
         .map(function (e) {
             var f = new Date(e.Vencimiento);
             f = f.toLocaleDateString();
-            rutaPhoto=e.urlphoto;
+            rutaPhoto = e.urlphoto;
             if (e.urlphoto == null) {
                 rutaPhoto = "";
             }

@@ -35,6 +35,7 @@ $("#nc_t_licencia").change(function (e) {
     e.preventDefault();
     tip = $("#nc_t_licencia").val();
     sel = {
+        p1:[{name:'motocicletas',val:0},{name:'Vehiculos Particulares',val:0}],
         P: ["Motocicletass", "Vehiculos Particulares"],
         A: ["Camiotena", "Vagoneta", "Tipo Taxi", "Furgoneta"],
         B: [
@@ -58,6 +59,8 @@ $("#nc_t_licencia").change(function (e) {
         ],
     };
 
+    console.log(sel['p1'][0]['name']);
+    console.log(sel['p1'][0]['val']);
     console.log(sel[tip]);
     html = sel[tip]
         .map(function (p, i) {
@@ -84,7 +87,7 @@ sel_1 = {
 };
 LT='';
 function saveTipoLicencia(l, i) {
-
+    console.log(l,i);
     if (sel_1[l][i] == 0) {
         sel_1[l][i] = 1;
     } else {

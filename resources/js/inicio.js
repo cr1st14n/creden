@@ -63,7 +63,6 @@ $(" #btn_menu_viculos").click(function (e) {
 });
 
 function noti_fi(tp, tx) {
-    console.log("ss");
     switch (tp) {
         case 1:
             params = {
