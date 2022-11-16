@@ -27,7 +27,8 @@
                         <div class="col-lg-6">
                         </div>
                         <div class="col-lg-3">
-                            <button type="button" id="btn_credenCV_add_item" class="btn btn-primary mb-2 btn-block"><i class="fa fa-plus-circle"></i> Agregar </button>
+                            <button type="button" id="btn_credenCV_add_item" class="btn btn-primary mb-2 btn-block"><i
+                                    class="fa fa-plus-circle"></i> Agregar </button>
                         </div>
                     </div>
                 </div>
@@ -40,7 +41,7 @@
                                     <th>Cod ZK</th>
                                     <th>Cod MYFARE</th>
                                     <th>Areas</th>
-                                    <th width='20%'>Acciones</th>
+                                    <th width='5%'>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody id="view_1_body">
@@ -52,16 +53,28 @@
         </div>
     </div>
 
-    <div class="modal fade" id="md_add_credenVis" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="md_add_credenVis" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog  " role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="demoModalLabel">Nuevo Credencial</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <form class="forms-sample" id="form_new_creden_visita">@csrf
                         <div class="form-group row ">
+                            <div class="col-sm-6">
+                                <div class="form-group small">
+                                    <select class="form-control form-bg-primary" name="ncv_aeropuerto">
+                                        <option value="LPB">EL ALTO</option>
+                                        <option value="CIJ">CAP. AV. ANIBAL ARAB FADUL</option>
+                                    </select>
+                                    <b>Aeropuerto </b>
+                                </div>
+                            </div>
+                            <div class=" col-sm-6"></div>
                             <div class="col-sm-6">
                                 <div class="form-group small">
                                     <input type="text" class="form-control" name="ncv_codt" required>
@@ -76,8 +89,15 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="ncv_areas_acceso" pattern="[0-9_-]{8}" maxlength="8" required placeholder="#-#-##-#, 8 simbolos">
+                                    <input type="text" class="form-control" name="ncv_areas_acceso"
+                                        pattern="[0-9_-]{8}" maxlength="8" required placeholder="#-#-##-#, 8 simbolos">
                                     <b>Areas Autorizadas</b>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input type="date" class="form-control" name="ncv_fechaLimite" required>
+                                    <b>Fecha de expiración</b>
                                 </div>
                             </div>
                             <div class="modal-footer col-sm-12">
@@ -90,12 +110,14 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="md_update_credencial" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="md_update_credencial" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="demoModalLabel">Nuevo Credencial</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <form class="forms-sample" id="form_update_creden">@csrf
@@ -315,12 +337,14 @@
         </div>
     </div>
     <!-- modals -->
-    <div class="modal fade" id="md_add_photo" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="md_add_photo" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="demoModalLabel">Cargar imagen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="panel-body" id="myId" style="padding: 0;">
@@ -337,7 +361,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="md_show_credencial_v" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="md_show_credencial_v" tabindex="-1" role="dialog"
+        aria-labelledby="demoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <embed src="" type="" id="emb_sec_pdf_creden_v" width="1000" height="800">
@@ -345,7 +370,8 @@
         </div>
     </div>
     <!-- modal para delete item -->
-    <div class="modal fade" id="md_crevis_deleteConfirm" tabindex="-1" role="dialog" aria-labelledby="demoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="md_crevis_deleteConfirm" tabindex="-1" role="dialog"
+        aria-labelledby="demoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -354,19 +380,22 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="destroy_creden_visita(2,0)">Confirmar</button>
+                    <button type="button" class="btn btn-primary"
+                        onclick="destroy_creden_visita(2,0)">Confirmar</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modal confirmar renovacion credencial -->
-    <div class="modal fade" id="mod_conf_renovacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
+    <div class="modal fade" id="mod_conf_renovacion" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterLabel" aria-hidden="true">
         <div class="modal-dialog  modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterLabel"></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <h5 id="text_creden_vigent"> <strong></strong></h5>
@@ -416,15 +445,18 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="exampleInputEmail3">Codigo de nuevo credencial</label>
-                                    <input type="number" class="form-control" id="ren_cred_codigo" name="ren_cred_codigo" placeholder="###">
+                                    <input type="number" class="form-control" id="ren_cred_codigo"
+                                        name="ren_cred_codigo" placeholder="###">
                                 </div>
                             </div>
                         </div>
-                        <p>Nota: Una vez confirmado, la renovación estara registrada dentro la base de datos y sera expresada en el futuro credencial con la letra <strong>"D"</strong></p>
+                        <p>Nota: Una vez confirmado, la renovación estara registrada dentro la base de datos y sera
+                            expresada en el futuro credencial con la letra <strong>"D"</strong></p>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="fun_renovar_creden(0,3)" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" onclick="fun_renovar_creden(0,3)" class="btn btn-secondary"
+                        data-dismiss="modal">Cancelar</button>
                     <button type="button" onclick="fun_renovar_creden(0,2)" class="btn btn-primary">Aceptar</button>
                 </div>
             </div>
@@ -432,4 +464,4 @@
     </div>
 </div>
 
-<script src="{{ asset('resources/js/credenciales_cv.js')}}"></script>
+<script src="{{ asset('resources/js/credenciales_cv.js') }}"></script>

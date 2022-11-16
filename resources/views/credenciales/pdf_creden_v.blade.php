@@ -61,12 +61,22 @@
             font-weight: bold;
         }
 
-        p.f {
+        p.codigo {
             position: fixed;
-            right: 220px;
+            right: 100px;
             top: 235px;
             font-size: 60px;
             color: black;
+            font-weight: bold;
+            font-family: sans-serif;
+
+        }
+        p.date {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            font-size: 60px;
+            color: rgb(255, 0, 0);
             font-weight: bold;
             font-family: sans-serif;
 
@@ -115,7 +125,8 @@
     <div class="ri">
         <!-- <img class="img_a" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"  alt=""> -->
         <!-- <p class="e"><br></p> -->
-        <p class="f">{{$data->Codigo}}</p>
+        <p class="date">{{$fecha}}</p>
+        <p class="codigo">{{$data->Codigo}}</p>
         <p class="b">{{$data->AreasAut}}</p>
         <p class="per"><strong style="color: red ;"></strong> <br> </p>
         <div style="page-break-after:always;"></div>

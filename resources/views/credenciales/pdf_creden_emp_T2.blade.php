@@ -69,6 +69,14 @@
             color: black;
             font-weight: bold;
         }
+        p.date {
+            position: fixed;
+            right: 75px;
+            top: 105px;
+            font-size: 30px;
+            color: black;
+            font-weight: bold;
+        }
 
 
         img.img_b {
@@ -114,8 +122,9 @@
         <!-- <img class="img_a" src="{{asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg')}}"  alt=""> -->
         <img class="img_b" src="{{asset($data->urlphoto)}}" alt="">
         <!-- <p class="e">{{$M}}<br>{{$Y}}</p> -->
-        <p class="f">{{$data->Codigo}}</p>
-        <p class="a"> {{$data->Nombre}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
+        <p class="date">{{$fecha}} asdfasdf</p>
+        <p class="f"> asdf{{$data->Codigo}}</p>
+        <p class="a"> {{$data->Nombres}} <br>{{$data->Paterno}} {{$data->Materno}}<br>{{$data->Cargo}} <br>{{$data->Empresa}}</p>
         <p class="b">{{$data->AreasAut}}</p>
         <p class="ci">{{$data->CI}}</p>
         <p class="per"><strong style="color: red ;"> @if($data->Herramientas != '') H @endif</strong> <br> @if($data->NroRenovacion != 0) D @endif</p>

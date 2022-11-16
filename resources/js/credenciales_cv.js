@@ -17,16 +17,23 @@ function show_list_A(res) {
     $("#view_1_body").html(
         res
             .map(function (e) {
+                let r = '0';
+                console.log((e.Codigo));
+                console.log();
                 return (a = `
                 <tr>
-                    <td>${e.Codigo}</td>
+                    <td>${r.repeat(  4-(`${e.Codigo}`).length)}${e.Codigo}-${e.aeropuerto_2}</td>
                     <td>${e.CodigoTarjeta}</td>
                     <td>${e.CodMYFARE}</td>
                     <td>${e.AreasAut}</td>
                     <td>
                         <div class="table-actions">
-                            <a href="#" onclick="fun_credeEmp_emage(${e.idEmpleado})"><i class="ik ik-clipboard"></i></a>
-                            <a href="#" onclick="destroy_creden_visita(1,${e.idEmpleado})"><i class="ik ik-trash-2"></i></a>
+                            <a href="#" onclick="fun_credeEmp_emage(${
+                                e.idEmpleado
+                            })"><i class="ik ik-clipboard"></i></a>
+                            <a href="#" onclick="destroy_creden_visita(1,${
+                                e.idEmpleado
+                            })"><i class="ik ik-trash-2"></i></a>
                         </div>
                     </td>
                 </tr>

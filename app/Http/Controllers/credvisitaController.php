@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleados;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PDF;
@@ -25,8 +26,9 @@ class credvisitaController extends Controller
                 'Empleados.CodigoTarjeta',
                 'Empleados.AreasAut',
                 'Empleados.CodMYFARE',
+                'Empleados.aeropuerto_2',
             )
-            ->orderBy('codigo', 'asc')
+            ->orderBy('Codigo', 'desc')
             ->get();
     }
     public function query_createCV(Request $request)
@@ -39,9 +41,11 @@ class credvisitaController extends Controller
         $new->CI = 0;
         $new->Tipo = 'V';
         $new->aeropuerto = $aero[session('aero')];
+        $new->aeropuerto_2 = $request->input('ncv_aeropuerto');
         $new->CodigoTarjeta = $request->input('ncv_codt');
         $new->CodMYFARE = $request->input('ncv_codMy');
         $new->AreasAut = $request->input('ncv_areas_acceso');
+        $new->Vencimiento = ($request->input('ncv_fechaLimite') == '') ? null :    Carbon::parse($request->input('nc_FNac'))->format('Y-d-m H:i:s');
         $res = $new->save();
         return $res;
     }
@@ -55,10 +59,26 @@ class credvisitaController extends Controller
             'Codigo',
             'AreasAut',
             'aeropuerto',
+            'aeropuerto_2',
+            'FechaVencCP',
         )->first();
+        switch (strlen($data['Codigo'])) {
+            case 1:
+                $data['Codigo'] = '000' . $data['Codigo'].'-'.$data['aeropuerto_2'];
+                break;
+            case 2:
+                $data['Codigo'] = '00' . $data['Codigo'].'-'.$data['aeropuerto_2'];
+                break;
+            case 3:
+                $data['Codigo'] = '0' . $data['Codigo'].'-'.$data['aeropuerto_2'];
+                break;
+        }
+        $meses = ['01' => 'ENE', '02' => 'FEB', '03' => 'MAR', '04' => 'ABR', '05' => 'MAY', '06' => 'JUN', '07' => 'JUL', '08' => 'AGO', '09' => 'SEP', '10' => 'OCT', '11' => 'NOV', '12' => 'DIC'];
+        $fe = Carbon::parse($data['Vencimiento']);
 
         $rutaimgV = [
             'LPB' => 'resources/plantilla/CREDENCIALESFOTOS/V-LPB.jpg',
+            'CIJ' => 'resources/plantilla/CREDENCIALESFOTOS/LPB-CIJ-VISITA.jpg',
             'CBB' => 'resources/plantilla/CREDENCIALESFOTOS/V-CBB.jpg',
             'VVI' => 'resources/plantilla/CREDENCIALESFOTOS/V-VVI.jpg',
         ];
@@ -66,8 +86,10 @@ class credvisitaController extends Controller
             'credenciales.pdf_creden_v',
             [
                 'data' => $data,
-                'ruta' => $rutaimgV[$data['aeropuerto']],
+                'ruta' => $rutaimgV[$data['aeropuerto_2']],
                 'aero' => $data['aeropuerto'],
+                'fecha' => $fe->format('d') . '-' . $meses[$fe->format('m')] . '-' . $fe->format('Y'),
+
 
             ]
         );

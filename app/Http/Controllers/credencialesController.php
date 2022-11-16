@@ -213,6 +213,7 @@ class credencialesController extends Controller
             $empr= substr($empr, 0, 18) . '...';
         }
         $fe = Carbon::parse($data['Vencimiento']);
+        $dfecha = $fe->format('d');
         $mfecha = $fe->format('m');
         $afecha = $fe->format('Y');
         $meses = ['01' => 'ENE', '02' => 'FEB', '03' => 'MAR', '04' => 'ABR', '05' => 'MAY', '06' => 'JUN', '07' => 'JUL', '08' => 'AGO', '09' => 'SEP', '10' => 'OCT', '11' => 'NOV', '12' => 'DIC'];
