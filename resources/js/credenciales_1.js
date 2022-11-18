@@ -3,7 +3,6 @@ idEmpleadoEdit = "";
 idEmpleadoRenovar = "";
 
 function fun_credeEmp_edit(param) {
-    console.log(param);
     $.ajax({
         type: "post",
         url: "credenciales/query_edit_emp",

@@ -291,7 +291,7 @@ class credencialesController extends Controller
 
             $q = str_replace(',', '', $data->data_vehi_aut['list']);
             $q = str_replace('1', 'X', $q);
-            $q = str_replace('0', '_', $q);
+            $q = str_replace('0', '.', $q);
             $pdf = pdf::loadView(
                 'credenciales.pdf_creden_emp_lc',
                 [
@@ -329,7 +329,14 @@ class credencialesController extends Controller
         $emp = Empleados::where('idEmpleado', $request->input('id'))->first();
         // return Carbon::parse($emp['Vencimiento'])->format('Y-d-m');
         // array_push($emp,['ven'=>Carbon::parse($emp['Vencimiento'])->format('Y-d-m')]);
-        return ['data' => $emp, 'ven' => Carbon::parse($emp['Vencimiento'])->format('Y-d-m'), 'nac' => Carbon::parse($emp['FechaNac'])->format('Y-d-m'), 'ing' => Carbon::parse($emp['Fecha'])->format('Y-d-m')];
+        return ['data' => $emp,
+         'ven' => Carbon::parse(),
+         'nac' => Carbon::parse(),
+          'ing' => Carbon::parse()];
+        $emp->Vencimiento=$emp['Vencimiento'])->format('Y-d-m');
+        $emp->FechaNac=$emp['FechaNac'])->format('Y-d-m');
+        $emp->Fecha=$emp['Fecha'])->format('Y-d-m');
+        return $emp;
     }
     public function query_update(Request $request)
     {

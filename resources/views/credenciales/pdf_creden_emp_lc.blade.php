@@ -154,6 +154,7 @@
             font-family: sans-serif;
             font-weight: bold;
         }
+
         p.ll2 {
             position: fixed;
             left: 50px;
@@ -166,6 +167,7 @@
             font-family: sans-serif;
             font-weight: bold;
         }
+
         p.ll3 {
             position: fixed;
             left: 50px;
@@ -178,6 +180,7 @@
             font-family: sans-serif;
             font-weight: bold;
         }
+
         p.ll4 {
             position: fixed;
             left: 50px;
@@ -199,7 +202,7 @@
         <!-- <img class="img_a" src="{{ asset('resources/plantilla/CREDENCIALESFOTOS/LAPAZAMVERSO.jpg') }}"  alt=""> -->
         <img class="img_b" src="{{ asset($data->urlphoto) }}" alt="">
         <!-- <p class="e">{{ $M }}<br>{{ $Y }}</p> -->
-        <p class="f">{{ $data->Codigo }}-{{$aero}} </p>
+        <p class="f">{{ $data->Codigo }}-{{ $aero }} </p>
         <p class="LCA">{{ $lic_1 }}</p>
         @if ($aero == 'LPB')
             <p class="a" style="color: black ;"> {{ $data->Nombre }} <br>{{ $data->Paterno }}
@@ -222,11 +225,26 @@
         </p>
         <img class="s2dapag" src="{{ asset('resources/plantilla/CREDENCIALESFOTOS/TODOSREVERSOlc.jpg') }}"
             alt="">
-
-        <p class="ll1">@if ($lic_1=='A') {{ $lic_2 }}  @endif</p>
-        <p class="ll2">@if ($lic_1=='B') {{ $lic_2 }}  @endif</p>
-        <p class="ll3">@if ($lic_1=='C') {{ $lic_2 }}  @endif</p>
-        <p class="ll4">@if ($lic_1=='P') {{ $lic_2 }}  @endif</p>
+        <p class="ll1">
+            @if ($lic_1 == 'A')
+                {{ $lic_2 }}
+            @endif
+        </p>
+        <p class="ll2">
+            @if ($lic_1 == 'B')
+                {{ $lic_2 }}
+            @endif
+        </p>
+        <p class="ll3">
+            @if ($lic_1 == 'C')
+                {{ $lic_2 }}
+            @endif
+        </p>
+        <p class="ll4">
+            @if ($lic_1 == 'P')
+                {{ $lic_2 }}
+            @endif
+        </p>
 </body>
 
 </html>
